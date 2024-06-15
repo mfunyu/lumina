@@ -1,3 +1,6 @@
+[README](README.md) • [Concept & Design (en)](CONCEPT.md) • [Subject (fr)](PDF.pdf)
+
+
 # Glados
 
 ## Planning
