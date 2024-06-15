@@ -12,4 +12,8 @@ def get_entities(filters):
     if status:
         query = query.filter(Entity.status == status)
 
+    room_id = filters.get("room_id")
+    if room_id:
+        query = query.filter(Entity.room_id == room_id)
+
     return query
