@@ -5,8 +5,8 @@
 | Étape                         | Description                                    | Jour       | Estimated Time       |
 |-------------------------------|------------------------------------------------|------------|----------------------|
 | **Étape 1 : Backend**         |                                                |            |                      |
-| 1.1 Développement du test     | Écrire des tests pour les fonctionnalités      | Jour 1     | 8 hours              |
-| 1.2 Développement du backend  | Implémentation du backend pour passer les tests| Jour 1     | 8 hours              |
+| ✅ 1.1 Développement du test     | Écrire des tests pour les fonctionnalités      | Jour 1     | 1 hours              |
+| ✅ 1.2 Développement du backend  | Implémentation du backend pour passer les tests| Jour 1     | 1 hours              |
 | **Étape 2 : Frontend**        |                                                |            |                      |
 | 2.1 Développement basic       | Développement de la structure de base du frontend | Jour 2 | 8 hours              |
 | 2.2 Design                    | Conception et stylisation du frontend          | Jour 3     | 8 hours              |
