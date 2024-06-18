@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     activeClass() {
-      return "text-indigo-600 cursor-default font-bold"
+      return "text-indigo-600 cursor-default font-bold border-b-2 border-indigo-600 transition-colors duration-200 ease-in-out"
     },
     inactiveClass() {
       return "text-gray-600 cursor-pointer hover:text-indigo-800 transition-colors duration-200 ease-in-out"
