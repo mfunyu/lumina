@@ -7,13 +7,13 @@
       v-else-if="isError"
       class="text-red-600">Error loading data</div>
     <div v-else>
-      <div class="flex gap-10 p-3">
+      <div class="flex gap-10 p-3 overflow-auto">
         <div
           v-for="room in rooms"
           :key="room.id">
           <span
             @click="getEntitiesByRoom(room.id)"
-            class="text-xl"
+            class="text-xl w-auto"
             :class="[ room.id === currentRoom ? activeClass : inactiveClass ]">{{ room.name }}</span>
         </div>
       </div>
@@ -85,8 +85,25 @@ export default {
         })
     },
     getEntitiesByRoom(roomId) {
+      if (this.currentRoom === roomId) {
+        this.getEntities()
+        this.currentRoom = null
+        return
+      }
       this.currentRoom = roomId
-      //return this.entities.filter((entity) => entity.roomId === roomId)
+      this.isLoading = true
+
+      coreApi.glados.getEntitiesByRoom(roomId)
+        .then((entities) => {
+          this.entities = entities
+        })
+        .catch((error) => {
+          console.error(error)
+          this.isError = true
+        })
+        .finally(() => {
+          this.isLoading = false
+        })
     }
   }
 }
