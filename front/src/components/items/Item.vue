@@ -5,26 +5,12 @@
       <p class="mt-2 text-gray-600">{{ item.status }}</p>
       <p class="mt-2 text-gray-600">{{ item.description }}</p>
     </div>
-    <lightbulboff
-      v-if="item.type === 'light' && item.status === 'off'"
+    <component
+      :is="iconComponent"
+      v-if="iconComponent"
       class="my-auto"
       :size="60"
-      :fillColor="'gray'" />
-    <lightbulb
-      v-else-if="item.type === 'light' && item.status === 'on'"
-      class="my-auto"
-      :size="60"
-      :fillColor="'yellow'" />
-    <lightswitch
-      v-else-if="item.type === 'switch' && item.status === 'on'"
-      class="my-auto"
-      :size="60"
-      :fillColor="'yellow'" />
-    <lightswitchoff
-      v-else-if="item.type === 'switch' && item.status === 'off'"
-      class="my-auto"
-      :size="60"
-      :fillColor="'gray'" />
+      :fillColor="iconColor" />
     <div
       v-else-if="item.value"
       class="my-auto flex"
@@ -47,6 +33,19 @@ export default {
     item: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    iconComponent() {
+      if (this.item.type === "light") {
+        return this.item.status === "off" ? "lightbulboff" : "lightbulb"
+      } else if (this.item.type === "switch") {
+        return this.item.status === "off" ? "lightswitchoff" : "lightswitch"
+      }
+      return null
+    },
+    iconColor() {
+      return this.item.status === "off" ? "gray" : "yellow"
     }
   }
 }
