@@ -15,7 +15,9 @@
       v-else-if="item.value"
       class="my-auto flex"
       :style="{ 'min-width': '60px' }">
-      <p class="m-auto text-3xl text-gray-600">{{ item.value }}</p>
+      <p
+        class="m-auto text-3xl"
+        :class="valueColor">{{ item.value }}</p>
       <span
         v-if="item.type === 'air_conditioner'"
         class="mt-2 m-1">
@@ -46,6 +48,14 @@ export default {
     },
     iconColor() {
       return this.item.status === "off" ? "gray" : "yellow"
+    },
+    valueColor() {
+      if (this.item.status !== "on")
+        return "text-gray-500"
+      if (this.item.type === "air_conditioner") {
+        return this.item.value >= 28 ? "text-green-400" : "text-blue-400"
+      }
+      return "text-yellow-500"
     }
   }
 }
