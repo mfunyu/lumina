@@ -11,7 +11,10 @@
         <div
           v-for="room in rooms"
           :key="room.id">
-          <span class="text-gray-600 font-bold text-xl">{{ room.name }}</span>
+          <span
+            @click="getEntitiesByRoom(room.id)"
+            class="text-xl"
+            :class="[ room.id === currentRoom ? activeClass : inactiveClass ]">{{ room.name }}</span>
         </div>
       </div>
       <div class="flex flex-wrap">
@@ -39,7 +42,16 @@ export default {
       entities: [],
       rooms: [],
       isLoading: false,
-      isError: false
+      isError: false,
+      currentRoom: null
+    }
+  },
+  computed: {
+    activeClass() {
+      return "text-indigo-600 cursor-default font-bold"
+    },
+    inactiveClass() {
+      return "text-gray-600 cursor-pointer hover:text-indigo-800 transition-colors duration-200 ease-in-out"
     }
   },
   methods: {
@@ -71,6 +83,10 @@ export default {
           console.error(error)
           this.isError = true
         })
+    },
+    getEntitiesByRoom(roomId) {
+      this.currentRoom = roomId
+      //return this.entities.filter((entity) => entity.roomId === roomId)
     }
   }
 }
