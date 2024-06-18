@@ -7,14 +7,28 @@
       v-else-if="isError"
       class="text-red-600">Error loading data</div>
     <div v-else>
-      <div class="flex gap-10 p-3 overflow-auto">
+      <div class="relative flex items-center">
+        <button
+          @click="scrollLeft"
+          class="absolute left-0 z-10 bg-white px-2 text-2xl text-grey-800">
+          &lt;
+        </button>
         <div
-          v-for="room in rooms"
-          :key="room.id">
-          <span
-            @click="getEntitiesByRoom(room.id)"
-            class="text-xl w-auto"
-            :class="[ room.id === currentRoom ? activeClass : inactiveClass ]">{{ room.name }}</span>
+          class="flex gap-10 p-3 overflow-hidden px-10"
+          ref="scrollContainer">
+          <div
+            v-for="room in rooms"
+            :key="room.id">
+            <span
+              @click="getEntitiesByRoom(room.id)"
+              class="text-xl whitespace-nowrap"
+              :class="[ room.id === currentRoom ? activeClass : inactiveClass ]">{{ room.name }}</span>
+          </div>
+          <button
+            @click="scrollRight"
+            class="absolute right-0 z-10 bg-white px-2 text-2xl text-grey-800">
+            &gt;
+          </button>
         </div>
       </div>
       <div class="flex flex-wrap">
@@ -104,6 +118,18 @@ export default {
         .finally(() => {
           this.isLoading = false
         })
+    },
+    scrollLeft() {
+      this.$refs.scrollContainer.scrollBy({
+        left: -150,
+        behavior: "smooth"
+      })
+    },
+    scrollRight() {
+      this.$refs.scrollContainer.scrollBy({
+        left: 150,
+        behavior: "smooth"
+      })
     }
   }
 }
