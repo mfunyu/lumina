@@ -22,7 +22,7 @@
             <span
               @click="getEntitiesByRoom(room.id)"
               class="text-xl whitespace-nowrap"
-              :class="[ room.id === currentRoom ? activeClass : inactiveClass ]">{{ room.name }}</span>
+              :class="[ room.id === currentRoomId ? activeClass : inactiveClass ]">{{ room.name }}</span>
           </div>
           <button
             @click="scrollRight"
@@ -57,7 +57,7 @@ export default {
       rooms: [],
       isLoading: false,
       isError: false,
-      currentRoom: null
+      currentRoomId: null
     }
   },
   computed: {
@@ -99,12 +99,12 @@ export default {
         })
     },
     getEntitiesByRoom(roomId) {
-      if (this.currentRoom === roomId) {
+      if (this.currentRoomId === roomId) {
         this.getEntities()
-        this.currentRoom = null
+        this.currentRoomId = null
         return
       }
-      this.currentRoom = roomId
+      this.currentRoomId = roomId
       this.isLoading = true
 
       coreApi.glados.getEntitiesByRoom(roomId)
