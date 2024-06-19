@@ -57,7 +57,8 @@ export default {
       rooms: [],
       isLoading: false,
       isError: false,
-      currentRoomId: null
+      currentRoomId: null,
+      savedScrollPosition: 0,
     }
   },
   computed: {
@@ -99,11 +100,13 @@ export default {
         })
     },
     getEntitiesByRoom(roomId) {
+      this.saveScrollPosition()
       if (this.currentRoomId === roomId) {
         this.getEntities()
         this.currentRoomId = null
         return
       }
+
       this.currentRoomId = roomId
       this.isLoading = true
 
@@ -117,7 +120,16 @@ export default {
         })
         .finally(() => {
           this.isLoading = false
+          this.restoreScrollPosition()
         })
+    },
+    saveScrollPosition() {
+      this.savedScrollPosition = this.$refs.scrollContainer.scrollLeft
+    },
+    restoreScrollPosition() {
+      this.$nextTick(() => {
+        this.$refs.scrollContainer.scrollLeft = this.savedScrollPosition
+      })
     },
     scrollLeft() {
       this.$refs.scrollContainer.scrollBy({
