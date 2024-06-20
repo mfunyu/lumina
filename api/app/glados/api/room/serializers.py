@@ -5,7 +5,7 @@ from glados.models import Room
 
 
 class RoomRequestSerializer(ma.Schema):
-    name = fields.String(required=True)
+    name = fields.String(required=True, validate=[lambda x: len(x) > 0])
 
 
 class RoomSerializer(ma.Schema):

@@ -7,15 +7,16 @@ def get_rooms():
 
     return query
 
+
 def add_room(data):
-    new_room = Room(name=data)
+    name = data.get("name")
+    new_room = Room(name=name)
 
     try:
         db.session.add(new_room)
         db.session.commit()
-        print(f"Room '{name}' added successfully!")
     except Exception as e:
         db.session.rollback()
-        print(f"Error adding room '{data}': {e}")
+        raise e
 
     return new_room

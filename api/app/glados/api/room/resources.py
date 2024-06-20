@@ -14,11 +14,8 @@ class RoomsAPI(Resource):
         return serializer.dump(rooms), 200
 
     def post(self):
-        # request_serializer = RoomRequestSerializer()
-        # data = request_serializer.load(request.data)
-        data = request.data
-        # return request.data, 200
-
+        request_serializer = RoomRequestSerializer()
+        data = request_serializer.load(request.form)
         room = add_room(data)
 
         serializer = RoomResponseSerializer()
