@@ -211,11 +211,10 @@ def test_post_entity_empty(client):
 
     assert response.status_code == 422
     assert response.json == {"errors": {
-        "name": ["Invalid value."],
-        "type": ["Invalid value."],
-        "status": ["Invalid value."],
-        "value": ["Invalid value."],
-        "room_id": ["Invalid value."]
+        "name": ["Shorter than minimum length 1."],
+        "room_id": ["Not a valid UUID."],
+        "type": ["Must be one of: sensor, light, switch, multimedia, air_conditioner."],
+        "status": ["Must be one of: on, off, unavailable."],
     }}
 
 
