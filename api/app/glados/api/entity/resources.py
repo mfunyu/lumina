@@ -1,7 +1,7 @@
 from flask import request
 from flask_restful import Resource
 
-from glados.api.entity.serializers import EntitiesRequestSerializer, EntityResponseSerializer, EntityUpdateSerializer
+from glados.api.entity.serializers import EntitiesRequestSerializer, EntityResponseSerializer, EntityCreateSerializer
 from glados.repositories.entities import get_entities, add_entity
 
 
@@ -16,8 +16,8 @@ class EntitiesAPI(Resource):
         return serializer.dump(entities), 200
 
     def post(self):
-        update_serializer = EntityUpdateSerializer()
-        data = update_serializer.load(request.form)
+        create_serializer = EntityCreateSerializer()
+        data = create_serializer.load(request.form)
 
         entity = add_entity(data)
 
