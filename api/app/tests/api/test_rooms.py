@@ -58,3 +58,32 @@ def test_post_room_missing_name(client):
     assert response.json == {"errors": {
         "name": ["Missing data for required field."]
     }}
+
+
+def test_put_room(client, rooms, mocker):
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000001", data={"name": "Kitchen 2"})
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "name": "Kitchen 2",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_room_empty(client):
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000001", data={"name": ""})
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Shorter than minimum length 1."],
+    }}
+
+
+def test_put_room_missing_name(client):
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000001")
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Missing data for required field."]
+    }}
