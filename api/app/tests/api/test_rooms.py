@@ -47,7 +47,7 @@ def test_post_room_empty(client):
 
     assert response.status_code == 422
     assert response.json == {"errors": {
-        "name": ["Invalid value."],
+        "name": ["Shorter than minimum length 1."],
     }}
 
 

@@ -1,11 +1,11 @@
-from marshmallow import fields
+from marshmallow import fields, validate
 
 from glados import ma
 from glados.models import Room
 
 
-class RoomRequestSerializer(ma.Schema):
-    name = fields.String(required=True, validate=[lambda x: len(x) > 0])
+class RoomCreateSerializer(ma.Schema):
+    name = fields.String(required=True, validate=validate.Length(min=1))
 
 
 class RoomSerializer(ma.Schema):
