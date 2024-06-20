@@ -178,3 +178,56 @@ def test_get_entities_with_room_filter(client, entities, mocker):
             "created_at": mocker.ANY
         }
     ]
+
+
+def test_post_entity(client, entities, mocker):
+    response = client.post("/entities", data={
+        "name": "Air Conditioner",
+        "type": "air_conditioner",
+        "status": "on",
+        "value": "22",
+        "room_id": "00000000-0000-0000-0000-000000000002"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": mocker.ANY,
+        "name": "Air Conditioner",
+        "type": "air_conditioner",
+        "status": "on",
+        "value": "22",
+        "created_at": mocker.ANY
+    }
+
+
+def test_post_entity_empty(client):
+    response = client.post("/entities", data={
+        "name": "",
+        "type": "",
+        "status": "",
+        "value": "",
+        "room_id": ""
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Invalid value."],
+        "type": ["Invalid value."],
+        "status": ["Invalid value."],
+        "value": ["Invalid value."],
+        "room_id": ["Invalid value."]
+    }}
+
+
+def test_post_entity_missing_name(client):
+    response = client.post("/entities", data={
+        "type": "light",
+        "status": "on",
+        "value": "200",
+        "room_id": "00000000-0000-0000-0000-000000000002"
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Missing data for required field."]
+    }}
