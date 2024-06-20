@@ -31,7 +31,7 @@ def test_get_rooms(client, rooms, mocker):
     ]
 
 
-def test_post_entity(client, mocker):
+def test_post_room(client, mocker):
     response = client.post("/rooms", data={"name": "Bedroom"})
 
     assert response.status_code == 200
@@ -42,7 +42,7 @@ def test_post_entity(client, mocker):
     }
 
 
-def test_get_entities_empty(client):
+def test_post_room_empty(client):
     response = client.post("/rooms", data={"name": ""})
 
     assert response.status_code == 422
@@ -51,7 +51,7 @@ def test_get_entities_empty(client):
     }}
 
 
-def test_post_entity_missing_name(client):
+def test_post_room_missing_name(client):
     response = client.post("/rooms")
 
     assert response.status_code == 422
