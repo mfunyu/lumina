@@ -230,3 +230,110 @@ def test_post_entity_missing_name(client):
     assert response.json == {"errors": {
         "name": ["Missing data for required field."]
     }}
+
+
+def test_put_entity(client, entities, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+        "name": "Ceiling Light 2",
+        "type": "light",
+        "status": "on",
+        "value": "100",
+        "room_id": "00000000-0000-0000-0000-000000000001"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "name": "Ceiling Light 2",
+        "type": "light",
+        "status": "on",
+        "value": "100",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_name(client, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000002", data={
+        "name": "Lamp 2"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000002",
+        "name": "Lamp 2",
+        "type": "light",
+        "status": "on",
+        "value": "200",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_status(client, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000003", data={
+        "status": "off"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000003",
+        "name": "Thermometer",
+        "type": "sensor",
+        "status": "off",
+        "value": "28",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_room_id(client, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000003", data={
+        "room_id": "00000000-0000-0000-0000-000000000001"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000003",
+        "name": "Thermometer",
+        "type": "sensor",
+        "status": "on",
+        "value": "28",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_empty(client):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+        "name": "",
+        "type": "",
+        "status": "",
+        "room_id": ""
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Shorter than minimum length 1."],
+        "room_id": ["Not a valid UUID."],
+        "type": ["Must be one of: sensor, light, switch, multimedia, air_conditioner."],
+        "status": ["Must be one of: on, off, unavailable."],
+    }}
+
+
+def test_put_entity_invalid_id(client):
+    response = client.put("/entities/invalid", data={
+        "name": "Invalid"
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "id": ["Not a valid UUID."]
+    }}
+
+
+def test_put_entity_invalid_room_id(client):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+        "room_id": "00000000-0000-0000-0000-000000000012"
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "room_id": ["Not a valid UUID."]
+    }}
