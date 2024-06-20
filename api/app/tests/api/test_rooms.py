@@ -29,3 +29,32 @@ def test_get_rooms(client, rooms, mocker):
             "created_at": mocker.ANY
         }
     ]
+
+
+def test_post_entity(client, mocker):
+    response = client.post("/rooms", data={"name": "Bedroom"})
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": mocker.ANY,
+        "name": "Bedroom",
+        "created_at": mocker.ANY
+    }
+
+
+def test_get_entities_empty(client):
+    response = client.get("/rooms", data={"name": ""})
+
+    assert response.status_code == 400
+    assert response.json == {"errors": {
+        "name": ["Empty value not allowed"]
+    }}
+
+
+def test_post_entity_missing_name(client):
+    response = client.post("/rooms")
+
+    assert response.status_code == 400
+    assert response.json == {"errors": {
+        "name": ["Missing data for required field."]
+    }}
