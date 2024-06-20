@@ -35,3 +35,33 @@ def add_entity(data):
     new_entity.save()
 
     return new_entity
+
+
+def update_entity(entity_id, data):
+    entity = Entity.query.get(entity_id)
+    if not entity:
+        return None
+
+    name = data.get("name")
+    if name:
+        entity.name = name
+
+    type = data.get("type")
+    if type:
+        entity.type = type
+
+    status = data.get("status")
+    if status:
+        entity.status = status
+
+    value = data.get("value")
+    if value:
+        entity.value = value
+
+    room_id = data.get("room_id")
+    if room_id:
+        entity.room_id = room_id
+
+    entity.save()
+
+    return entity
