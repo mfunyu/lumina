@@ -13,3 +13,13 @@ def add_room(data):
     new_room.save()
 
     return new_room
+
+
+def update_room(room_id, data):
+    room = Room.query.get(room_id)
+
+    name = data.get("name")
+    room.name = name
+    room.save()
+
+    return room

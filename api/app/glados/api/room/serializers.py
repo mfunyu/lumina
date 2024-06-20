@@ -23,3 +23,7 @@ class RoomSerializer(ma.Schema):
 
 class RoomResponseSerializer(RoomSerializer):
     pass
+
+
+class RoomUpdateSerializer(ma.Schema):
+    name = fields.String(required=True, validate=validate.Length(min=1))

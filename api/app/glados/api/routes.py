@@ -15,4 +15,4 @@ api.add_resource(misc_resources.VersionAPI, "/")
 api.add_resource(entity_resources.EntitiesAPI, "/entities")
 
 # Rooms endpoints
-api.add_resource(room_resources.RoomsAPI, "/rooms")
+api.add_resource(room_resources.RoomsAPI, "/rooms", "/rooms/<uuid:room_id>")
