@@ -322,10 +322,11 @@ def test_put_entity_invalid_id(client):
         "name": "Invalid"
     })
 
-    assert response.status_code == 422
-    assert response.json == {"errors": {
-        "id": ["Not a valid UUID."]
-    }}
+    assert response.status_code == 404
+    assert response.json == {
+        "error": "not_found",
+        "message": "Resource not found."
+    }
 
 
 def test_put_entity_invalid_room_id(client):
