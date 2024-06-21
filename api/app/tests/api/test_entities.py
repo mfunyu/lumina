@@ -252,7 +252,7 @@ def test_put_entity(client, entities, mocker):
     }
 
 
-def test_put_entity_name(client, mocker):
+def test_put_entity_name(client, entities, mocker):
     response = client.put("/entities/00000000-0000-0000-0000-000000000002", data={
         "name": "Lamp 2"
     })
@@ -268,7 +268,7 @@ def test_put_entity_name(client, mocker):
     }
 
 
-def test_put_entity_status(client, mocker):
+def test_put_entity_status(client, entities, mocker):
     response = client.put("/entities/00000000-0000-0000-0000-000000000003", data={
         "status": "off"
     })
@@ -284,7 +284,7 @@ def test_put_entity_status(client, mocker):
     }
 
 
-def test_put_entity_room_id(client, mocker):
+def test_put_entity_room_id(client, entities, mocker):
     response = client.put("/entities/00000000-0000-0000-0000-000000000003", data={
         "room_id": "00000000-0000-0000-0000-000000000001"
     })
@@ -329,7 +329,7 @@ def test_put_entity_invalid_id(client):
     }
 
 
-def test_put_entity_invalid_room_id(client):
+def test_put_entity_invalid_room_id(client, entities):
     response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
         "room_id": "00000000-0000-0000-0000-000000000012"
     })
