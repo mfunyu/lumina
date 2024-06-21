@@ -51,3 +51,13 @@ class EntitySerializer(ma.Schema):
 
 class EntityResponseSerializer(EntitySerializer):
     pass
+
+
+class EntityIdSerializer(ma.Schema):
+    id = fields.UUID(required=True, error_messages={"id": "Not a valid UUID."})
+
+    @validates("id")
+    def validate_id(self, value):
+        entity = Entity.query.get(value)
+        if not entity:
+            raise ValidationError("Entity not found.")

@@ -300,7 +300,7 @@ def test_put_entity_room_id(client, entities, mocker):
     }
 
 
-def test_put_entity_empty(client):
+def test_put_entity_empty(client, entities):
     response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
         "name": "",
         "type": "",
@@ -314,6 +314,17 @@ def test_put_entity_empty(client):
         "room_id": ["Not a valid UUID."],
         "type": ["Must be one of: sensor, light, switch, multimedia, air_conditioner."],
         "status": ["Must be one of: on, off, unavailable."],
+    }}
+
+
+def test_put_entity_id_not_found(client):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+        "name": "Invalid"
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "id": ["Entity not found."]
     }}
 
 
