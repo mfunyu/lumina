@@ -1,4 +1,5 @@
 from glados.models import Room
+from glados import db
 
 
 def get_rooms():
@@ -23,3 +24,12 @@ def update_room(room_id, data):
     room.save()
 
     return room
+
+
+def delete_room(room_id):
+    room = Room.query.get(room_id)
+    if not room:
+        raise Exception("Room not found")
+
+    db.session.delete(room)
+    db.session.commit()

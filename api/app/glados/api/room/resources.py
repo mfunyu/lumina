@@ -2,7 +2,7 @@ from flask import request
 from flask_restful import Resource
 
 from glados.api.room.serializers import RoomCreateSerializer, RoomResponseSerializer, RoomUpdateSerializer, RoomIdSerializer
-from glados.repositories.rooms import get_rooms, add_room, update_room
+from glados.repositories.rooms import get_rooms, add_room, update_room, delete_room
 
 
 class RoomsAPI(Resource):
@@ -22,9 +22,20 @@ class RoomsAPI(Resource):
         return serializer.dump(room), 200
 
     def put(self, room_id):
+        id_serializer = RoomIdSerializer()
+        room_id = id_serializer.load({"id": room_id})
+
         update_serializer = RoomUpdateSerializer()
         data = update_serializer.load(request.form)
         room = update_room(room_id, data)
 
         serializer = RoomResponseSerializer()
         return serializer.dump(room), 200
+
+    def delete(self, room_id):
+        id_serializer = RoomIdSerializer()
+        room_id = id_serializer.load({"id": room_id})
+
+        delete_room(room_id)
+
+        return {}, 204

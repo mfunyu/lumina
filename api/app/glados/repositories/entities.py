@@ -1,4 +1,5 @@
 from glados.models import Entity
+from glados import db
 
 
 def get_entities(filters):
@@ -65,3 +66,12 @@ def update_entity(entity_id, data):
     entity.save()
 
     return entity
+
+
+def delete_entity(entity_id):
+    entity = Entity.query.get(entity_id)
+    if not entity:
+        raise Exception("Entity not found")
+
+    db.session.delete(entity)
+    db.session.commit()

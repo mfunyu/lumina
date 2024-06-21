@@ -2,7 +2,7 @@ from flask import request
 from flask_restful import Resource
 
 from glados.api.entity.serializers import EntitiesRequestSerializer, EntityResponseSerializer, EntityCreateSerializer, EntityUpdateSerializer, EntityIdSerializer
-from glados.repositories.entities import get_entities, add_entity, update_entity
+from glados.repositories.entities import get_entities, add_entity, update_entity, delete_entity
 
 
 class EntitiesAPI(Resource):
@@ -35,3 +35,11 @@ class EntitiesAPI(Resource):
 
         serializer = EntityResponseSerializer()
         return serializer.dump(entity), 200
+
+    def delete(self, entity_id):
+        id_serializer = EntityIdSerializer()
+        entity_id = id_serializer.load({"id": entity_id})
+
+        delete_entity(entity_id)
+
+        return {}, 204

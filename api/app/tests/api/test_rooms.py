@@ -102,15 +102,14 @@ def test_delete_room(client, rooms):
     response = client.delete("/rooms/00000000-0000-0000-0000-000000000001")
 
     assert response.status_code == 204
-    assert response.data == {}
+    assert response.data == b""
     assert Room.query.get(uuid.UUID(int=1)) is None
 
 
 def test_delete_room_not_found(client):
-    response = client.delete("/rooms/00000000-0000-0000-0000-000000000001")
+    response = client.delete("/rooms/00000000-0000-0000-0000-000000000012")
 
-    assert response.status_code == 404
-    assert response.json == {
-        "error": "not_found",
-        "message": "Resource not found."
-    }
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "id": ["Room not found."]
+    }}
