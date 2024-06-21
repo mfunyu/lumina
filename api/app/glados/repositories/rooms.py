@@ -1,5 +1,4 @@
 from glados.models import Room
-from glados import db
 
 
 def get_rooms():
@@ -11,7 +10,7 @@ def get_rooms():
 def add_room(data):
     name = data.get("name")
     new_room = Room(name=name)
-    new_room.save()
+    new_room.save(commit=True)
 
     return new_room
 
@@ -21,7 +20,7 @@ def update_room(room_id, data):
 
     name = data.get("name")
     room.name = name
-    room.save()
+    room.save(commit=True)
 
     return room
 
@@ -31,5 +30,4 @@ def delete_room(room_id):
     if not room:
         raise Exception("Room not found")
 
-    db.session.delete(room)
-    db.session.commit()
+    room.remove(commit=True)

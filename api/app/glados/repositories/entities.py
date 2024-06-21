@@ -1,5 +1,4 @@
 from glados.models import Entity
-from glados import db
 
 
 def get_entities(filters):
@@ -33,7 +32,7 @@ def add_entity(data):
         status=status,
         value=value,
         room_id=room_id)
-    new_entity.save()
+    new_entity.save(commit=True)
 
     return new_entity
 
@@ -63,7 +62,7 @@ def update_entity(entity_id, data):
     if room_id:
         entity.room_id = room_id
 
-    entity.save()
+    entity.save(commit=True)
 
     return entity
 
@@ -73,5 +72,4 @@ def delete_entity(entity_id):
     if not entity:
         raise Exception("Entity not found")
 
-    db.session.delete(entity)
-    db.session.commit()
+    entity.remove(commit=True)
