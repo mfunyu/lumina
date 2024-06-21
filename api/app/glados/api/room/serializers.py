@@ -1,4 +1,4 @@
-from marshmallow import fields, validate
+from marshmallow import fields, validate, validates, ValidationError
 
 from glados import ma
 from glados.models import Room
@@ -27,3 +27,12 @@ class RoomResponseSerializer(RoomSerializer):
 
 class RoomUpdateSerializer(ma.Schema):
     name = fields.String(required=True, validate=validate.Length(min=1))
+
+
+class RoomIdSerializer(ma.Schema):
+    id = fields.UUID(required=True, error_messages={"id": "Not a valid UUID."})
+
+    @validates("id")
+    def validate_id(self, value):
+        if not Room.query.get(value):
+            raise ValidationError("Room not found.")

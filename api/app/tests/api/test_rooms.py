@@ -71,7 +71,7 @@ def test_put_room(client, rooms, mocker):
     }
 
 
-def test_put_room_empty(client):
+def test_put_room_empty(client, rooms):
     response = client.put("/rooms/00000000-0000-0000-0000-000000000001", data={"name": ""})
 
     assert response.status_code == 422
@@ -80,12 +80,21 @@ def test_put_room_empty(client):
     }}
 
 
-def test_put_room_missing_name(client):
+def test_put_room_missing_name(client, rooms):
     response = client.put("/rooms/00000000-0000-0000-0000-000000000001")
 
     assert response.status_code == 422
     assert response.json == {"errors": {
         "name": ["Missing data for required field."]
+    }}
+
+
+def test_put_room_not_found(client):
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000012", data={"name": "Bedroom"})
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "id": ["Room not found."]
     }}
 
 

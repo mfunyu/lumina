@@ -1,7 +1,7 @@
 from flask import request
 from flask_restful import Resource
 
-from glados.api.room.serializers import RoomCreateSerializer, RoomResponseSerializer, RoomUpdateSerializer
+from glados.api.room.serializers import RoomCreateSerializer, RoomResponseSerializer, RoomUpdateSerializer, RoomIdSerializer
 from glados.repositories.rooms import get_rooms, add_room, update_room
 
 
