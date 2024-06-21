@@ -338,3 +338,21 @@ def test_put_entity_invalid_room_id(client, entities):
     assert response.json == {"errors": {
         "room_id": ["Room not found."]
     }}
+
+
+def test_delete_entity(client, entities):
+    response = client.delete("/entities/00000000-0000-0000-0000-000000000001")
+
+    assert response.status_code == 204
+    assert response.data == {}
+    assert Entity.query.get(uuid.UUID(int=1)) is None
+
+
+def test_delete_entity_not_found(client):
+    response = client.delete("/entities/00000000-0000-0000-0000-000000000001")
+
+    assert response.status_code == 404
+    assert response.json == {
+        "error": "not_found",
+        "message": "Resource not found."
+    }

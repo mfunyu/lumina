@@ -87,3 +87,21 @@ def test_put_room_missing_name(client):
     assert response.json == {"errors": {
         "name": ["Missing data for required field."]
     }}
+
+
+def test_delete_room(client, rooms):
+    response = client.delete("/rooms/00000000-0000-0000-0000-000000000001")
+
+    assert response.status_code == 204
+    assert response.data == {}
+    assert Room.query.get(uuid.UUID(int=1)) is None
+
+
+def test_delete_room_not_found(client):
+    response = client.delete("/rooms/00000000-0000-0000-0000-000000000001")
+
+    assert response.status_code == 404
+    assert response.json == {
+        "error": "not_found",
+        "message": "Resource not found."
+    }
