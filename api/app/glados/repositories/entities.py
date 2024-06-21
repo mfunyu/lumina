@@ -40,7 +40,7 @@ def add_entity(data):
 def update_entity(entity_id, data):
     entity = Entity.query.get(entity_id)
     if not entity:
-        return None
+        raise Exception("Entity not found")
 
     name = data.get("name")
     if name:

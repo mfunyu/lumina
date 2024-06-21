@@ -336,5 +336,5 @@ def test_put_entity_invalid_room_id(client, entities):
 
     assert response.status_code == 422
     assert response.json == {"errors": {
-        "room_id": ["Not a valid UUID."]
+        "room_id": ["Room not found."]
     }}
