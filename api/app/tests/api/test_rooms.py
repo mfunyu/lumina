@@ -96,13 +96,11 @@ def test_put_room_missing_name(client, rooms):
     }}
 
 
-def test_put_room_not_found(client):
+def test_put_room_not_found(client, rooms):
     response = client.put("/rooms/00000000-0000-0000-0000-000000000012", headers=headers, json={"name": "Bedroom"})
 
-    assert response.status_code == 422
-    assert response.json == {"errors": {
-        "id": ["Room not found."]
-    }}
+    assert response.status_code == 404
+    assert response.json == {"message": "Room not found."}
 
 
 def test_delete_room(client, rooms):
@@ -116,7 +114,5 @@ def test_delete_room(client, rooms):
 def test_delete_room_not_found(client):
     response = client.delete("/rooms/00000000-0000-0000-0000-000000000012")
 
-    assert response.status_code == 422
-    assert response.json == {"errors": {
-        "id": ["Room not found."]
-    }}
+    assert response.status_code == 404
+    assert response.json == {"message": "Room not found."}

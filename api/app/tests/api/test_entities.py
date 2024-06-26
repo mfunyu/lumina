@@ -329,10 +329,8 @@ def test_put_entity_id_not_found(client):
         "name": "Invalid"
     })
 
-    assert response.status_code == 422
-    assert response.json == {"errors": {
-        "id": ["Entity not found."]
-    }}
+    assert response.status_code == 404
+    assert response.json == {"message": "Entity not found."}
 
 
 def test_put_entity_invalid_id(client):
@@ -369,7 +367,5 @@ def test_delete_entity(client, entities):
 def test_delete_entity_not_found(client):
     response = client.delete("/entities/00000000-0000-0000-0000-000000000001")
 
-    assert response.status_code == 422
-    assert response.json == {"errors": {
-        "id": ["Entity not found."]
-    }}
+    assert response.status_code == 404
+    assert response.json == {"message": "Entity not found."}
