@@ -4,6 +4,12 @@ import pytest
 from glados import constants
 from glados.models import Entity, Room
 
+mimetype = 'application/json'
+headers = {
+    'Content-Type': mimetype,
+    'Accept': mimetype
+}
+
 
 @pytest.fixture
 def entities():
@@ -181,13 +187,14 @@ def test_get_entities_with_room_filter(client, entities, mocker):
 
 
 def test_post_entity(client, entities, mocker):
-    response = client.post("/entities", data={
+    data = {
         "name": "Air Conditioner",
         "type": "air_conditioner",
         "status": "on",
         "value": "22",
         "room_id": "00000000-0000-0000-0000-000000000002"
-    })
+    }
+    response = client.post("/entities", json=data, headers=headers)
 
     assert response.status_code == 200
     assert response.json == {
@@ -201,7 +208,7 @@ def test_post_entity(client, entities, mocker):
 
 
 def test_post_entity_empty(client):
-    response = client.post("/entities", data={
+    response = client.post("/entities", headers=headers, json={
         "name": "",
         "type": "",
         "status": "",
@@ -219,7 +226,7 @@ def test_post_entity_empty(client):
 
 
 def test_post_entity_missing_name(client):
-    response = client.post("/entities", data={
+    response = client.post("/entities", headers=headers, json={
         "type": "light",
         "status": "on",
         "value": "200",
@@ -233,7 +240,7 @@ def test_post_entity_missing_name(client):
 
 
 def test_put_entity(client, entities, mocker):
-    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
         "name": "Ceiling Light 2",
         "type": "light",
         "status": "on",
@@ -253,7 +260,7 @@ def test_put_entity(client, entities, mocker):
 
 
 def test_put_entity_name(client, entities, mocker):
-    response = client.put("/entities/00000000-0000-0000-0000-000000000002", data={
+    response = client.put("/entities/00000000-0000-0000-0000-000000000002", headers=headers, json={
         "name": "Lamp 2"
     })
 
@@ -269,7 +276,7 @@ def test_put_entity_name(client, entities, mocker):
 
 
 def test_put_entity_status(client, entities, mocker):
-    response = client.put("/entities/00000000-0000-0000-0000-000000000003", data={
+    response = client.put("/entities/00000000-0000-0000-0000-000000000003", headers=headers, json={
         "status": "off"
     })
 
@@ -285,7 +292,7 @@ def test_put_entity_status(client, entities, mocker):
 
 
 def test_put_entity_room_id(client, entities, mocker):
-    response = client.put("/entities/00000000-0000-0000-0000-000000000003", data={
+    response = client.put("/entities/00000000-0000-0000-0000-000000000003", headers=headers, json={
         "room_id": "00000000-0000-0000-0000-000000000001"
     })
 
@@ -301,7 +308,7 @@ def test_put_entity_room_id(client, entities, mocker):
 
 
 def test_put_entity_empty(client, entities):
-    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
         "name": "",
         "type": "",
         "status": "",
@@ -318,7 +325,7 @@ def test_put_entity_empty(client, entities):
 
 
 def test_put_entity_id_not_found(client):
-    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
         "name": "Invalid"
     })
 
@@ -329,7 +336,7 @@ def test_put_entity_id_not_found(client):
 
 
 def test_put_entity_invalid_id(client):
-    response = client.put("/entities/invalid", data={
+    response = client.put("/entities/invalid", headers=headers, json={
         "name": "Invalid"
     })
 
@@ -341,7 +348,7 @@ def test_put_entity_invalid_id(client):
 
 
 def test_put_entity_invalid_room_id(client, entities):
-    response = client.put("/entities/00000000-0000-0000-0000-000000000001", data={
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
         "room_id": "00000000-0000-0000-0000-000000000012"
     })
 

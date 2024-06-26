@@ -4,6 +4,13 @@ import pytest
 from glados.models import Room
 
 
+mimetype = 'application/json'
+headers = {
+    'Content-Type': mimetype,
+    'Accept': mimetype
+}
+
+
 @pytest.fixture
 def rooms():
     kitchen = Room(id=uuid.UUID(int=1), name="Kitchen")
@@ -32,7 +39,7 @@ def test_get_rooms(client, rooms, mocker):
 
 
 def test_post_room(client, mocker):
-    response = client.post("/rooms", data={"name": "Bedroom"})
+    response = client.post("/rooms", headers=headers, json={"name": "Bedroom"})
 
     assert response.status_code == 200
     assert response.json == {
@@ -43,7 +50,7 @@ def test_post_room(client, mocker):
 
 
 def test_post_room_empty(client):
-    response = client.post("/rooms", data={"name": ""})
+    response = client.post("/rooms", headers=headers, json={"name": ""})
 
     assert response.status_code == 422
     assert response.json == {"errors": {
@@ -51,7 +58,7 @@ def test_post_room_empty(client):
     }}
 
 
-def test_post_room_missing_name(client):
+def test_post_room_missing_name(client, rooms):
     response = client.post("/rooms")
 
     assert response.status_code == 422
@@ -61,7 +68,7 @@ def test_post_room_missing_name(client):
 
 
 def test_put_room(client, rooms, mocker):
-    response = client.put("/rooms/00000000-0000-0000-0000-000000000001", data={"name": "Kitchen 2"})
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000001", headers=headers, json={"name": "Kitchen 2"})
 
     assert response.status_code == 200
     assert response.json == {
@@ -72,7 +79,7 @@ def test_put_room(client, rooms, mocker):
 
 
 def test_put_room_empty(client, rooms):
-    response = client.put("/rooms/00000000-0000-0000-0000-000000000001", data={"name": ""})
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000001", headers=headers, json={"name": ""})
 
     assert response.status_code == 422
     assert response.json == {"errors": {
@@ -90,7 +97,7 @@ def test_put_room_missing_name(client, rooms):
 
 
 def test_put_room_not_found(client):
-    response = client.put("/rooms/00000000-0000-0000-0000-000000000012", data={"name": "Bedroom"})
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000012", headers=headers, json={"name": "Bedroom"})
 
     assert response.status_code == 422
     assert response.json == {"errors": {
