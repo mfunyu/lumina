@@ -33,6 +33,7 @@
       </div>
       <div class="flex flex-wrap">
         <Item
+          @click="changeStatus(entity)"
           v-for="entity in entities"
           :key="entity.id"
           :item="entity" />
@@ -121,6 +122,17 @@ export default {
         .finally(() => {
           this.isLoading = false
           this.restoreScrollPosition()
+        })
+    },
+    changeStatus(entity) {
+      const newStatus = entity.status === "on" ? "off" : "on"
+      coreApi.glados.changeEntityData(entity.id, { status: newStatus })
+        .then(() => {
+          this.getEntitiesByRoom(this.currentRoomId)
+        })
+        .catch((error) => {
+          console.error(error)
+          this.isError = true
         })
     },
     saveScrollPosition() {
