@@ -15,7 +15,7 @@ class RoomsAPI(Resource):
 
     def post(self):
         create_serializer = RoomCreateSerializer()
-        data = create_serializer.load(request.form)
+        data = create_serializer.load(request.json)
         room = add_room(data)
 
         serializer = RoomResponseSerializer()
@@ -26,7 +26,7 @@ class RoomsAPI(Resource):
         room_id = id_serializer.load({"id": room_id})
 
         update_serializer = RoomUpdateSerializer()
-        data = update_serializer.load(request.form)
+        data = update_serializer.load(request.json)
         room = update_room(room_id, data)
 
         serializer = RoomResponseSerializer()

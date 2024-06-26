@@ -17,7 +17,7 @@ class EntitiesAPI(Resource):
 
     def post(self):
         create_serializer = EntityCreateSerializer()
-        data = create_serializer.load(request.form)
+        data = create_serializer.load(request.json)
 
         entity = add_entity(data)
 
@@ -29,7 +29,7 @@ class EntitiesAPI(Resource):
         entity_id = id_serializer.load({"id": entity_id})
 
         update_serializer = EntityUpdateSerializer()
-        data = update_serializer.load(request.form)
+        data = update_serializer.load(request.json)
 
         entity = update_entity(entity_id, data)
 

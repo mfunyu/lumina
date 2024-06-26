@@ -1,4 +1,4 @@
-from marshmallow import fields, validate, validates, ValidationError
+from marshmallow import fields, validate, validates
 
 from glados import ma
 from glados.models import Room
@@ -34,5 +34,4 @@ class RoomIdSerializer(ma.Schema):
 
     @validates("id")
     def validate_id(self, value):
-        if not Room.query.get(value):
-            raise ValidationError("Room not found.")
+        Room.query.get_or_404(value, description="Room not found.")

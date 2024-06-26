@@ -58,6 +58,4 @@ class EntityIdSerializer(ma.Schema):
 
     @validates("id")
     def validate_id(self, value):
-        entity = Entity.query.get(value)
-        if not entity:
-            raise ValidationError("Entity not found.")
+        Entity.query.get_or_404(value, description="Entity not found.")
