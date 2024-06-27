@@ -1,10 +1,11 @@
 from glados.models import Room
+from sqlalchemy import asc
 
 
 def get_rooms():
     query = Room.query
 
-    return query
+    return query.order_by(asc(Room.created_at))
 
 
 def add_room(data):

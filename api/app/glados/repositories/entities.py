@@ -1,4 +1,5 @@
 from glados.models import Entity
+from sqlalchemy import asc
 
 
 def get_entities(filters):
@@ -16,7 +17,7 @@ def get_entities(filters):
     if room_id:
         query = query.filter(Entity.room_id == room_id)
 
-    return query
+    return query.order_by(asc(Entity.created_at))
 
 
 def add_entity(data):
