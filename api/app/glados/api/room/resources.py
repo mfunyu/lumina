@@ -21,7 +21,9 @@ class RoomsAPI(Resource):
         serializer = RoomResponseSerializer()
         return serializer.dump(room), 200
 
-    def put(self, room_id):
+    def put(self, room_id=None):
+        if not room_id:
+            return {"error": "Room ID is required"}, 400
         id_serializer = RoomIdSerializer()
         room_id = id_serializer.load({"id": room_id})
 

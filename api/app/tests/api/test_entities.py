@@ -225,7 +225,7 @@ def test_post_entity_empty(client):
     }}
 
 
-def test_post_entity_missing_name(client):
+def test_post_entity_missing_name(client, entities):
     response = client.post("/entities", headers=headers, json={
         "type": "light",
         "status": "on",
@@ -354,6 +354,18 @@ def test_put_entity_invalid_room_id(client, entities):
     assert response.json == {"errors": {
         "room_id": ["Room not found."]
     }}
+
+
+def test_put_entity_missing_name(client, entities):
+    response = client.put("/entities", headers=headers, json={
+        "type": "light",
+        "status": "on",
+        "value": "100",
+        "room_id": "00000000-0000-0000-0000-000000000001"
+    })
+
+    assert response.status_code == 400
+    assert response.json == {"error": "Entity ID is required"}
 
 
 def test_delete_entity(client, entities):

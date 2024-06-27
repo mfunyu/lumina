@@ -24,10 +24,11 @@ class EntitiesAPI(Resource):
         serializer = EntityResponseSerializer()
         return serializer.dump(entity), 200
 
-    def put(self, entity_id):
+    def put(self, entity_id=None):
+        if not entity_id:
+            return {"error": "Entity ID is required"}, 400
         id_serializer = EntityIdSerializer()
         entity_id = id_serializer.load({"id": entity_id})
-
         update_serializer = EntityUpdateSerializer()
         data = update_serializer.load(request.json)
 
