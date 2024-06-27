@@ -59,7 +59,7 @@ def test_post_room_empty(client):
 
 
 def test_post_room_missing_name(client, rooms):
-    response = client.post("/rooms")
+    response = client.post("/rooms", headers=headers, json={})
 
     assert response.status_code == 422
     assert response.json == {"errors": {
@@ -88,7 +88,7 @@ def test_put_room_empty(client, rooms):
 
 
 def test_put_room_missing_name(client, rooms):
-    response = client.put("/rooms/00000000-0000-0000-0000-000000000001")
+    response = client.put("/rooms/00000000-0000-0000-0000-000000000001", headers=headers, json={})
 
     assert response.status_code == 422
     assert response.json == {"errors": {
