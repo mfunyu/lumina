@@ -1,5 +1,5 @@
 <template>
-  <div class="item-container flex m-3 py-2 px-5 rounded-md bg-gray-200 shadow-sm">
+  <div class="item-container flex m-3 py-2 px-5 rounded-md bg-stone-100 shadow-sm">
     <div>
       <h2
         class="mt-4 font-bold"
@@ -19,7 +19,7 @@
       v-if="iconComponent"
       class="my-auto"
       :size="60"
-      :fillColor="iconColor" />
+      :class="iconColor" />
     <div
       v-else-if="item.value"
       class="my-auto flex"
@@ -52,14 +52,19 @@ export default {
     },
     iconComponent() {
       if (this.item.type === "light") {
-        return this.item.status === "off" ? "lightbulboff" : "lightbulb"
+        return this.item.status === "on" ? "lightbulb" : "lightbulboff"
       } else if (this.item.type === "switch") {
-        return this.item.status === "off" ? "lightswitchoff" : "lightswitch"
+        return this.item.status === "on" ? "lightswitch" : "lightswitchoff"
       }
       return null
     },
     iconColor() {
-      return this.item.status === "off" ? "gray" : "yellow"
+      if (this.item.status === "on") {
+        return "text-yellow-400"
+      } else if (this.item.status === "off") {
+        return "text-gray-500"
+      }
+      return "text-gray-300"
     },
     valueColor() {
       if (this.item.status !== "on")
@@ -67,7 +72,7 @@ export default {
       if (this.item.type === "air_conditioner") {
         return this.item.value >= 28 ? "text-green-400" : "text-blue-400"
       }
-      return "text-yellow-500"
+      return "text-yellow-400"
     }
   }
 }
