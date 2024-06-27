@@ -129,8 +129,11 @@ export default {
         return
       const newStatus = entity.status === "on" ? "off" : "on"
       coreApi.glados.changeEntityData(entity.id, { status: newStatus })
-        .then(() => {
-          this.getEntitiesByRoom(this.currentRoomId)
+        .then((updatedEntity) => {
+          const index = this.entities.findIndex(e => e.id === entity.id)
+          if (index !== -1) {
+            this.entities[index] = updatedEntity
+          }
         })
         .catch((error) => {
           console.error(error)
