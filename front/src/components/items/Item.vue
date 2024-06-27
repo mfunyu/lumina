@@ -1,9 +1,18 @@
 <template>
   <div class="item-container flex m-3 py-2 px-5 rounded-md bg-gray-200 shadow-sm">
     <div>
-      <h2 class="mt-4 text-gray font-bold">{{ item.name }}</h2>
-      <p class="mt-2 text-gray-600">{{ item.status }}</p>
-      <p class="mt-2 text-gray-600">{{ item.description }}</p>
+      <h2
+        class="mt-4 font-bold"
+        :class="fontColor">
+        {{ item.name }}</h2>
+      <p
+        class="mt-2"
+        :class="fontColor">
+        {{ item.status }}</p>
+      <p
+        class="mt-2"
+        :class="fontColor">
+        {{ item.description }}</p>
     </div>
     <component
       :is="iconComponent"
@@ -38,6 +47,9 @@ export default {
     }
   },
   computed: {
+    fontColor() {
+      return this.item.status === "unavailable" ? "text-gray-400" : "text-gray-600"
+    },
     iconComponent() {
       if (this.item.type === "light") {
         return this.item.status === "off" ? "lightbulboff" : "lightbulb"

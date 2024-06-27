@@ -125,6 +125,8 @@ export default {
         })
     },
     changeStatus(entity) {
+      if (entity.status == "unavailable")
+        return
       const newStatus = entity.status === "on" ? "off" : "on"
       coreApi.glados.changeEntityData(entity.id, { status: newStatus })
         .then(() => {
