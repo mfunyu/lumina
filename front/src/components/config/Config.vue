@@ -33,6 +33,7 @@
       :initialData="modalData"
       :isItem="isItemModal"
       :errorMessage="modalErrorMessage"
+      :rooms="rooms"
       @close="closeModal"
       @save="handleSave" />
   </div>
@@ -125,7 +126,8 @@ export default {
         name: "",
         status: "",
         type: "",
-        value: ""
+        value: "",
+        roomId: "",
       }
       this.modalErrorMessage = undefined
       this.isItemModal = true

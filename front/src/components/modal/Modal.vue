@@ -45,6 +45,23 @@ Copier le code
             </select>
           </div>
           <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Room</label>
+            <select
+              v-model="roomId"
+              class="w-full border border-gray-300 p-2 rounded-md focus:border-indigo-600"
+              required>
+              <option
+                value=""
+                disabled>Select room</option>
+              <option
+                v-for="room in rooms"
+                :key="room.id"
+                :value="room.id">
+                {{ room.name }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-4">
             <label class="block text-sm font-medium mb-1">Value</label>
             <input
               v-model="value"
@@ -85,13 +102,15 @@ export default {
     initialData: Object,
     isItem: Boolean,
     errorMessage: Object,
+    rooms: Array,
   },
   data() {
     return {
       name: this.initialData?.name || "",
       type: this.initialData?.type || "",
       status: this.initialData?.status || "",
-      value: this.initialData?.value || ""
+      value: this.initialData?.value || "",
+      roomId: this.initialData?.roomId || "",
     }
   },
   methods: {
@@ -105,6 +124,7 @@ export default {
           type: this.type,
           status: this.status,
           value: this.value,
+          room_id: this.roomId,
         })
       } else {
         this.$emit("save", { name: this.name, })
