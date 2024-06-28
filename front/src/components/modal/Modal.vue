@@ -33,7 +33,14 @@
             type="text"
             required />
         </div>
-        <div class="flex justify-end">
+        <div class="flex justify-end gap-3">
+          <Button
+            label="Close"
+            @click="close"
+            secondary="true" />
+          <Button
+            label="Save"
+            type="submit" />
         </div>
       </form>
     </div>
@@ -41,9 +48,11 @@
 </template>
 
 <script>
+import Button from "@/components/buttons/Button.vue"
 
 export default {
   name: "Modal",
+  components: { Button },
   props: {
     isOpen: Boolean,
     title: String,
