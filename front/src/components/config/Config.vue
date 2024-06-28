@@ -15,19 +15,22 @@
         :key="entity.id"
         :item="entity" />
     </div>
+    <Modal :isOpen="true"/>
   </div>
 </template>
 
 <script>
 import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
-import Room from "../cards/Room.vue"
+import Modal from "@/components/modal/Modal.vue"
+import Room from "@/components/cards/Room.vue"
 
 export default {
   name: "Config",
   components: {
     Item,
-    Room
+    Room,
+    Modal
   },
   created() {
     this.loadData()
@@ -69,7 +72,7 @@ export default {
           console.error(error)
           this.isError = true
         })
-    }
+    },
   }
 }
 </script>
