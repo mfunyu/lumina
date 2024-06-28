@@ -27,11 +27,11 @@
           v-if="isItem"
           class="mb-4">
           <label class="block text-sm font-medium mb-1">Room ID</label>
-          <input
+          <!-- <input
             v-model="roomId"
             class="w-full border border-gray-300 p-2 rounded-md"
             type="text"
-            required />
+            required /> -->
         </div>
         <div class="flex justify-end gap-3">
           <Button
@@ -71,11 +71,14 @@ export default {
       this.$emit("close")
     },
     handleSubmit() {
-      this.$emit("save", {
-        name: this.name,
-        status: this.status,
-        roomId: this.roomId
-      })
+      if (this.isItem) {
+        this.$emit("save", {
+          name: this.name,
+          status: this.status,
+        })
+      }   else {
+        this.$emit("save", { name: this.name, })
+      }
       this.close()
     },
   },

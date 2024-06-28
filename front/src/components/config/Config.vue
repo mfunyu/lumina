@@ -3,6 +3,7 @@
     <p class="px-5 text-indigo-600 font-bold text-2xl">rooms</p>
     <div class="flex overflow-scroll">
       <Room
+        @click="openRoomModal(room)"
         v-for="room in rooms"
         :key="room.id"
         :room="room" />
@@ -11,11 +12,18 @@
     <p class="px-5 text-indigo-600 font-bold text-2xl">entities</p>
     <div class="flex flex-wrap">
       <Item
+        @click="openItemModal(entity)"
         v-for="entity in entities"
         :key="entity.id"
         :item="entity" />
     </div>
-    <Modal :isOpen="true"/>
+    <Modal
+      :isOpen="isModalOpen"
+      :title="modalTitle"
+      :initialData="modalData"
+      :isItem="isItemModal"
+      @close="closeModal"
+      @save="handleSave" />
   </div>
 </template>
 
@@ -41,6 +49,10 @@ export default {
       rooms: [],
       isLoading: false,
       isError: false,
+      isModalOpen: false,
+      modalTitle: "",
+      modalData: null,
+      isItemModal: false,
     }
   },
   methods: {
@@ -72,6 +84,32 @@ export default {
           console.error(error)
           this.isError = true
         })
+    },
+    openRoomModal(room) {
+      this.isModalOpen = true
+      this.modalTitle = "Edit Room"
+      this.modalData = room
+      this.isItemModal = false
+      console.log(this.modalData.id)
+    },
+    openItemModal(item) {
+      this.isModalOpen = true
+      this.modalTitle = "Edit Item"
+      this.modalData = item
+      this.isItemModal = true
+    },
+    closeModal() {
+      this.isModalOpen = false
+      this.modalData = null
+    },
+    handleSave(data) {
+      console.log(data, this.modalData.id)
+      if (this.isItemModal) {
+        return coreApi.glados.changeEntityData(this.modalData.id, data)
+      } else {
+        return coreApi.glados.changeRoomData(this.modalData.id, data)
+      }
+      
     },
   }
 }
