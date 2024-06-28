@@ -42,19 +42,19 @@ def upgrade():
     op.execute("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"")
 
     # Populate database
-    op.execute("insert into rooms values ('7609a74c-644e-480c-b32d-7eea7f27c773', 'Kitchen', '2020-01-01T00:00:00.000Z')")
-    op.execute("insert into rooms values ('d9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d', 'Living Room', '2020-01-01T00:00:00.000Z')")
-    op.execute("insert into rooms values ('51b7475f-d2d1-45b6-9303-33d7f3915f78', 'Bedroom', '2020-01-01T00:00:00.000Z')")
-    op.execute("insert into rooms values ('a5a89aac-53f9-4b47-b14b-02e43c8ba6ad', 'Bathroom', '2020-01-01T00:00:00.000Z')")
+    op.execute("insert into rooms values ('7609a74c-644e-480c-b32d-7eea7f27c773', 'Kitchen', '2020-01-01T00:00:01.000Z')")
+    op.execute("insert into rooms values ('d9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d', 'Living Room', '2020-01-01T00:00:02.000Z')")
+    op.execute("insert into rooms values ('51b7475f-d2d1-45b6-9303-33d7f3915f78', 'Bedroom', '2020-01-01T00:00:03.000Z')")
+    op.execute("insert into rooms values ('a5a89aac-53f9-4b47-b14b-02e43c8ba6ad', 'Bathroom', '2020-01-01T00:00:04.000Z')")
 
-    op.execute("insert into entities values (uuid_generate_v4(), 'Thermometer', 'sensor', 'on', '34.2', '2020-01-01 00:00:00', null)")
-    op.execute("insert into entities values (uuid_generate_v4(), 'Kitchen light 1', 'light', 'off', null, '2020-01-01 00:00:00', '7609a74c-644e-480c-b32d-7eea7f27c773')")
-    op.execute("insert into entities values (uuid_generate_v4(), 'Living room light 1', 'light', 'on', '255', '2020-01-01 00:00:00', 'd9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d')")
-    op.execute("insert into entities values (uuid_generate_v4(), 'Living room light 2', 'light', 'off', null, '2020-01-01 00:00:00', 'd9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d')")
-    op.execute("insert into entities values (uuid_generate_v4(), 'Television', 'multimedia', 'on', 'TF1', '2020-01-01 00:00:00', 'd9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d')")
-    op.execute("insert into entities values (uuid_generate_v4(), 'Bedroom switch 1', 'switch', 'on', '1', '2020-01-01 00:00:00', '51b7475f-d2d1-45b6-9303-33d7f3915f78')")
-    op.execute("insert into entities values (uuid_generate_v4(), 'Bedroom light 1', 'light', 'unavailable', null, '2020-01-01 00:00:00', '51b7475f-d2d1-45b6-9303-33d7f3915f78')")
-    op.execute("insert into entities values (uuid_generate_v4(), 'Air conditioner', 'air_conditioner', 'on', '24', '2020-01-01 00:00:00', '51b7475f-d2d1-45b6-9303-33d7f3915f78')")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Thermometer', 'sensor', 'on', '34.2', '2020-01-01 00:00:02', null)")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Kitchen light 1', 'light', 'off', null, '2020-01-01 00:00:10', '7609a74c-644e-480c-b32d-7eea7f27c773')")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Living room light 1', 'light', 'on', '255', '2020-01-01 00:01:00', 'd9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d')")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Living room light 2', 'light', 'off', null, '2020-01-01 00:03:00', 'd9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d')")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Television', 'multimedia', 'on', 'TF1', '2020-01-01 00:05:00', 'd9ec9a2f-6fd7-4e3c-ad29-7e293dcaa18d')")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Bedroom switch 1', 'switch', 'on', '1', '2020-01-01 00:06:00', '51b7475f-d2d1-45b6-9303-33d7f3915f78')")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Bedroom light 1', 'light', 'unavailable', null, '2020-01-01 01:00:00', '51b7475f-d2d1-45b6-9303-33d7f3915f78')")
+    op.execute("insert into entities values (uuid_generate_v4(), 'Air conditioner', 'air_conditioner', 'on', '24', '2020-01-01 02:00:00', '51b7475f-d2d1-45b6-9303-33d7f3915f78')")
 
 
 def downgrade():

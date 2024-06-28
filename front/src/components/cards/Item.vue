@@ -1,16 +1,29 @@
 <template>
-  <div class="item-container flex m-3 py-2 px-5 rounded-md bg-gray-200 shadow-sm">
+  <div class="item-container relative flex m-3 py-2 px-5 rounded-md bg-stone-100 shadow-sm">
     <div>
-      <h2 class="mt-4 text-gray font-bold">{{ item.name }}</h2>
-      <p class="mt-2 text-gray-600">{{ item.status }}</p>
-      <p class="mt-2 text-gray-600">{{ item.description }}</p>
+      <button
+        v-if="deleteEnabled"
+        @click.stop="$emit('delete')"
+        class="delete-button absolute top-2 right-2 text-stone-400 text-2xl hover:text-red-500">&times;</button>
+      <h2
+        class="mt-4 font-bold"
+        :class="fontColor">
+        {{ item.name }}</h2>
+      <p
+        class="mt-2"
+        :class="fontColor">
+        {{ item.status }}</p>
+      <p
+        class="mt-2"
+        :class="fontColor">
+        {{ item.description }}</p>
     </div>
     <component
       :is="iconComponent"
       v-if="iconComponent"
       class="my-auto"
       :size="60"
-      :fillColor="iconColor" />
+      :class="iconColor" />
     <div
       v-else-if="item.value"
       class="my-auto flex"
@@ -35,19 +48,31 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    deleteEnabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
+    fontColor() {
+      return this.item.status === "unavailable" ? "text-gray-400" : "text-gray-600"
+    },
     iconComponent() {
       if (this.item.type === "light") {
-        return this.item.status === "off" ? "lightbulboff" : "lightbulb"
+        return this.item.status === "on" ? "lightbulb" : "lightbulboff"
       } else if (this.item.type === "switch") {
-        return this.item.status === "off" ? "lightswitchoff" : "lightswitch"
+        return this.item.status === "on" ? "lightswitch" : "lightswitchoff"
       }
       return null
     },
     iconColor() {
-      return this.item.status === "off" ? "gray" : "yellow"
+      if (this.item.status === "on") {
+        return "text-yellow-400"
+      } else if (this.item.status === "off") {
+        return "text-gray-500"
+      }
+      return "text-gray-300"
     },
     valueColor() {
       if (this.item.status !== "on")
@@ -55,7 +80,7 @@ export default {
       if (this.item.type === "air_conditioner") {
         return this.item.value >= 28 ? "text-green-400" : "text-blue-400"
       }
-      return "text-yellow-500"
+      return "text-yellow-400"
     }
   }
 }

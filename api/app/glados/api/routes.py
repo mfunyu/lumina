@@ -12,7 +12,7 @@ api = Api(blueprint)
 api.add_resource(misc_resources.VersionAPI, "/")
 
 # Entities endpoints
-api.add_resource(entity_resources.EntitiesAPI, "/entities")
+api.add_resource(entity_resources.EntitiesAPI, "/entities", "/entities/<uuid:entity_id>")
 
 # Rooms endpoints
-api.add_resource(room_resources.RoomsAPI, "/rooms")
+api.add_resource(room_resources.RoomsAPI, "/rooms", "/rooms/<uuid:room_id>")

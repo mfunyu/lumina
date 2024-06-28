@@ -4,6 +4,12 @@ import pytest
 from glados import constants
 from glados.models import Entity, Room
 
+mimetype = 'application/json'
+headers = {
+    'Content-Type': mimetype,
+    'Accept': mimetype
+}
+
 
 @pytest.fixture
 def entities():
@@ -178,3 +184,200 @@ def test_get_entities_with_room_filter(client, entities, mocker):
             "created_at": mocker.ANY
         }
     ]
+
+
+def test_post_entity(client, entities, mocker):
+    data = {
+        "name": "Air Conditioner",
+        "type": "air_conditioner",
+        "status": "on",
+        "value": "22",
+        "room_id": "00000000-0000-0000-0000-000000000002"
+    }
+    response = client.post("/entities", json=data, headers=headers)
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": mocker.ANY,
+        "name": "Air Conditioner",
+        "type": "air_conditioner",
+        "status": "on",
+        "value": "22",
+        "created_at": mocker.ANY
+    }
+
+
+def test_post_entity_empty(client):
+    response = client.post("/entities", headers=headers, json={
+        "name": "",
+        "type": "",
+        "status": "",
+        "value": "",
+        "room_id": ""
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Shorter than minimum length 1."],
+        "room_id": ["Not a valid UUID."],
+        "type": ["Must be one of: sensor, light, switch, multimedia, air_conditioner."],
+        "status": ["Must be one of: on, off, unavailable."],
+    }}
+
+
+def test_post_entity_missing_name(client, entities):
+    response = client.post("/entities", headers=headers, json={
+        "type": "light",
+        "status": "on",
+        "value": "200",
+        "room_id": "00000000-0000-0000-0000-000000000002"
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Missing data for required field."]
+    }}
+
+
+def test_put_entity(client, entities, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
+        "name": "Ceiling Light 2",
+        "type": "light",
+        "status": "on",
+        "value": "100",
+        "room_id": "00000000-0000-0000-0000-000000000001"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "name": "Ceiling Light 2",
+        "type": "light",
+        "status": "on",
+        "value": "100",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_name(client, entities, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000002", headers=headers, json={
+        "name": "Lamp 2"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000002",
+        "name": "Lamp 2",
+        "type": "light",
+        "status": "on",
+        "value": "200",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_status(client, entities, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000003", headers=headers, json={
+        "status": "off"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000003",
+        "name": "Thermometer",
+        "type": "sensor",
+        "status": "off",
+        "value": "28",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_room_id(client, entities, mocker):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000003", headers=headers, json={
+        "room_id": "00000000-0000-0000-0000-000000000001"
+    })
+
+    assert response.status_code == 200
+    assert response.json == {
+        "id": "00000000-0000-0000-0000-000000000003",
+        "name": "Thermometer",
+        "type": "sensor",
+        "status": "on",
+        "value": "28",
+        "created_at": mocker.ANY
+    }
+
+
+def test_put_entity_empty(client, entities):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
+        "name": "",
+        "type": "",
+        "status": "",
+        "room_id": ""
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "name": ["Shorter than minimum length 1."],
+        "room_id": ["Not a valid UUID."],
+        "type": ["Must be one of: sensor, light, switch, multimedia, air_conditioner."],
+        "status": ["Must be one of: on, off, unavailable."],
+    }}
+
+
+def test_put_entity_id_not_found(client):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
+        "name": "Invalid"
+    })
+
+    assert response.status_code == 404
+    assert response.json == {"message": "Entity not found."}
+
+
+def test_put_entity_invalid_id(client):
+    response = client.put("/entities/invalid", headers=headers, json={
+        "name": "Invalid"
+    })
+
+    assert response.status_code == 404
+    assert response.json == {
+        "error": "not_found",
+        "message": "Resource not found."
+    }
+
+
+def test_put_entity_invalid_room_id(client, entities):
+    response = client.put("/entities/00000000-0000-0000-0000-000000000001", headers=headers, json={
+        "room_id": "00000000-0000-0000-0000-000000000012"
+    })
+
+    assert response.status_code == 422
+    assert response.json == {"errors": {
+        "room_id": ["Room not found."]
+    }}
+
+
+def test_put_entity_missing_name(client, entities):
+    response = client.put("/entities", headers=headers, json={
+        "type": "light",
+        "status": "on",
+        "value": "100",
+        "room_id": "00000000-0000-0000-0000-000000000001"
+    })
+
+    assert response.status_code == 400
+    assert response.json == {"error": "Entity ID is required"}
+
+
+def test_delete_entity(client, entities):
+    response = client.delete("/entities/00000000-0000-0000-0000-000000000001")
+
+    assert response.status_code == 204
+    assert response.data == b""
+    assert Entity.query.get(uuid.UUID(int=1)) is None
+
+
+def test_delete_entity_not_found(client):
+    response = client.delete("/entities/00000000-0000-0000-0000-000000000001")
+
+    assert response.status_code == 404
+    assert response.json == {"message": "Entity not found."}

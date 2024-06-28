@@ -27,6 +27,10 @@ export default {
           name: "dashboard"
         },
         {
+          label: "Config",
+          name: "config"
+        },
+        {
           label: "About",
           name: "about"
         }

@@ -33,6 +33,7 @@
       </div>
       <div class="flex flex-wrap">
         <Item
+          @click="changeStatus(entity)"
           v-for="entity in entities"
           :key="entity.id"
           :item="entity" />
@@ -43,7 +44,7 @@
 
 <script>
 import coreApi from "@/providers/core-api"
-import Item from "@/components/items/Item"
+import Item from "@/components/cards/Item"
 
 export default {
   name: "Dashboard",
@@ -121,6 +122,22 @@ export default {
         .finally(() => {
           this.isLoading = false
           this.restoreScrollPosition()
+        })
+    },
+    changeStatus(entity) {
+      if (entity.status == "unavailable")
+        return
+      const newStatus = entity.status === "on" ? "off" : "on"
+      coreApi.glados.changeEntityData(entity.id, { status: newStatus })
+        .then((updatedEntity) => {
+          const index = this.entities.findIndex(e => e.id === entity.id)
+          if (index !== -1) {
+            this.entities[index] = updatedEntity
+          }
+        })
+        .catch((error) => {
+          console.error(error)
+          this.isError = true
         })
     },
     saveScrollPosition() {

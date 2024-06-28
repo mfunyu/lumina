@@ -3,10 +3,9 @@
     type="submit"
     :disabled="disabled || loading"
     class="
-      inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600
+      inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm font-medium rounded-md
       transition-colors duration-300
-      hover:bg-indigo-500
-      focus:bg-indigo-700 focus:outline-none
+      focus:outline-none
       disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed"
     :class="classes">
     {{ label }}
@@ -43,12 +42,18 @@ export default {
     emoji: {
       type: String,
       required: false
+    },
+    secondary: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     classes() {
+      const color = this.secondary ? "bg-stone-300 hover:bg-stone-200 focus:bg-stone-400"
+        : " text-white bg-indigo-600 hover:bg-indigo-500 focus:bg-indigo-700"
       const SIZES_MAP = { large: "uppercase text-2xl py-3 px-7 font-bold tracking-wider" }
-      return SIZES_MAP[this.size] || ""
+      return `${color} ${SIZES_MAP[this.size]}` || `${color}`
     }
   }
 }
