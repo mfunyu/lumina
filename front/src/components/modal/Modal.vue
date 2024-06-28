@@ -1,3 +1,5 @@
+
+Copier le code
 <template>
   <div
     v-if="isOpen"
@@ -17,19 +19,35 @@
           v-if="isItem"
           class="mb-4">
           <label class="block text-sm font-medium mb-1">Status</label>
-          <input
+          <select
             v-model="status"
             class="w-full border border-gray-300 p-2 rounded-md"
-            type="text" />
+            required>
+            <option
+              value=""
+              disabled>Select status</option>
+            <option value="on">On</option>
+            <option value="off">Off</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
         </div>
         <div
           v-if="isItem"
           class="mb-4">
           <label class="block text-sm font-medium mb-1">Type</label>
-          <input
+          <select
             v-model="type"
             class="w-full border border-gray-300 p-2 rounded-md"
-            type="text" />
+            required>
+            <option
+              value=""
+              disabled>Select type</option>
+            <option value="sensor">Sensor</option>
+            <option value="light">Light</option>
+            <option value="switch">Switch</option>
+            <option value="multimedia">Multimedia</option>
+            <option value="air-conditioned">Air conditioner</option>
+          </select>
         </div>
         <div
           v-if="isItem"
