@@ -9,7 +9,9 @@
     <div class="flex overflow-scroll">
       <Room
         @click="openRoomModal(room)"
+        @delete="deleteRoom(room.id)"
         v-for="room in rooms"
+        :deleteEnabled="true"
         :key="room.id"
         :room="room" />
     </div>
@@ -23,7 +25,9 @@
     <div class="flex flex-wrap">
       <Item
         @click="openItemModal(entity)"
+        @delete="deleteEntity(entity.id)"
         v-for="entity in entities"
+        :deleteEnabled="true"
         :key="entity.id"
         :item="entity" />
     </div>
@@ -174,7 +178,6 @@ export default {
               this.modalErrorMessage = error.data.errors
             })
         } else {
-          console.log(data)
           return coreApi.glados.createRoom(data)
             .then((newRoom) => {
               this.rooms.push(newRoom)
@@ -186,6 +189,24 @@ export default {
         }
       }
     },
+    deleteEntity(id) {
+      coreApi.glados.deleteEntity(id)
+        .then(() => {
+          this.entities = this.entities.filter((entity) => entity.id !== id)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
+    deleteRoom(id) {
+      coreApi.glados.deleteRoom(id)
+        .then(() => {
+          this.rooms = this.rooms.filter((room) => room.id !== id)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
   }
 }
 </script>

@@ -15,5 +15,17 @@ export default {
   },
   changeRoomData(roomId, data) {
     return coreApiClient.sendRequest("put", `/rooms/${roomId}`, data)
-  }
+  },
+  createEntity(data) {
+    return coreApiClient.sendRequest("post", "/entities", data)
+  },
+  createRoom(data) {
+    return coreApiClient.sendRequest("post", "/rooms", data)
+  },
+  deleteEntity(entityId) {
+    return coreApiClient.sendRequest("delete", `/entities/${entityId}`, {})
+  },
+  deleteRoom(roomId) {
+    return coreApiClient.sendRequest("delete", `/rooms/${roomId}`, {})
+  },
 }
