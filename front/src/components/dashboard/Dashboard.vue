@@ -44,7 +44,7 @@
 
 <script>
 import coreApi from "@/providers/core-api"
-import Item from "@/components/items/Item"
+import Item from "@/components/cards/Item"
 
 export default {
   name: "Dashboard",
