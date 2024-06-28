@@ -12,5 +12,8 @@ export default {
   },
   changeEntityData(entityId, data) {
     return coreApiClient.sendRequest("put", `/entities/${entityId}`, data)
+  },
+  changeRoomData(roomId, data) {
+    return coreApiClient.sendRequest("put", `/rooms/${roomId}`, data)
   }
 }
