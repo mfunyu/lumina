@@ -37,7 +37,7 @@
           <Button
             label="Close"
             @click="close"
-            secondary="true" />
+            :secondary=true />
           <Button
             label="Save"
             type="submit" />
