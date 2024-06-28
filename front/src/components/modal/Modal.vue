@@ -1,9 +1,7 @@
 
 Copier le code
 <template>
-  <div
-    v-if="isOpen"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
     <div class="bg-white p-6 rounded-md shadow-md w-2/4">
       <h2 class="text-xl font-bold mb-4">{{ title }}</h2>
       <form @submit.prevent="handleSubmit">
@@ -11,52 +9,48 @@ Copier le code
           <label class="block text-sm font-medium mb-1">Name</label>
           <input
             v-model="name"
-            class="w-full border border-gray-300 p-2 rounded-md"
+            class="w-full border border-gray-300 p-2 rounded-md focus:border-indigo-600"
             type="text"
             required />
         </div>
-        <div
-          v-if="isItem"
-          class="mb-4">
-          <label class="block text-sm font-medium mb-1">Status</label>
-          <select
-            v-model="status"
-            class="w-full border border-gray-300 p-2 rounded-md"
-            required>
-            <option
-              value=""
-              disabled>Select status</option>
-            <option value="on">On</option>
-            <option value="off">Off</option>
-            <option value="unavailable">Unavailable</option>
-          </select>
-        </div>
-        <div
-          v-if="isItem"
-          class="mb-4">
-          <label class="block text-sm font-medium mb-1">Type</label>
-          <select
-            v-model="type"
-            class="w-full border border-gray-300 p-2 rounded-md"
-            required>
-            <option
-              value=""
-              disabled>Select type</option>
-            <option value="sensor">Sensor</option>
-            <option value="light">Light</option>
-            <option value="switch">Switch</option>
-            <option value="multimedia">Multimedia</option>
-            <option value="air-conditioned">Air conditioner</option>
-          </select>
-        </div>
-        <div
-          v-if="isItem"
-          class="mb-4">
-          <label class="block text-sm font-medium mb-1">Value</label>
-          <input
-            v-model="value"
-            class="w-full border border-gray-300 p-2 rounded-md"
-            type="text" />
+        <div v-if="isItem">
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Status</label>
+            <select
+              v-model="status"
+              class="w-full border border-gray-300 p-2 rounded-md focus:border-indigo-600"
+              required>
+              <option
+                value=""
+                disabled>Select status</option>
+              <option value="on">On</option>
+              <option value="off">Off</option>
+              <option value="unavailable">Unavailable</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Type</label>
+            <select
+              v-model="type"
+              class="w-full border border-gray-300 p-2 rounded-md focus:border-indigo-600"
+              required>
+              <option
+                value=""
+                disabled>Select type</option>
+              <option value="sensor">Sensor</option>
+              <option value="light">Light</option>
+              <option value="switch">Switch</option>
+              <option value="multimedia">Multimedia</option>
+              <option value="air-conditioned">Air conditioner</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Value</label>
+            <input
+              v-model="value"
+              class="w-full border border-gray-300 p-2 rounded-md focus:border-indigo-600"
+              type="text" />
+          </div>
         </div>
         <div v-if="errorMessage">
           <div
@@ -87,7 +81,6 @@ export default {
   name: "Modal",
   components: { Button },
   props: {
-    isOpen: Boolean,
     title: String,
     initialData: Object,
     isItem: Boolean,

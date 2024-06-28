@@ -1,6 +1,11 @@
 <template>
   <div class="flex flex-col gap-5">
-    <p class="px-5 text-indigo-600 font-bold text-2xl">rooms</p>
+    <div class="flex items-center justify-between px-5">
+      <p class="text-indigo-600 font-bold text-2xl">rooms</p>
+      <button
+        @click="openNewRoomModal"
+        class="text-indigo-600 font-bold text-3xl">+</button>
+    </div>
     <div class="flex overflow-scroll">
       <Room
         @click="openRoomModal(room)"
@@ -9,7 +14,12 @@
         :room="room" />
     </div>
     <hr class="border-gray-300 my-4" />
-    <p class="px-5 text-indigo-600 font-bold text-2xl">entities</p>
+    <div class="flex items-center justify-between px-5">
+      <p class="text-indigo-600 font-bold text-2xl">entities</p>
+      <button
+        @click="openNewItemModal"
+        class="text-indigo-600 font-bold text-3xl">+</button>
+    </div>
     <div class="flex flex-wrap">
       <Item
         @click="openItemModal(entity)"
@@ -18,7 +28,7 @@
         :item="entity" />
     </div>
     <Modal
-      :isOpen="isModalOpen"
+      v-if="isModalOpen"
       :title="modalTitle"
       :initialData="modalData"
       :isItem="isItemModal"
@@ -93,7 +103,6 @@ export default {
       this.modalData = room
       this.modalErrorMessage = ""
       this.isItemModal = false
-      console.log(this.modalData.id)
     },
     openItemModal(item) {
       this.isModalOpen = true
@@ -117,7 +126,6 @@ export default {
             this.closeModal()
           })
           .catch((error) => {
-            console.error("myerror", error.data.errors)
             this.modalErrorMessage = error.data.errors
           })
       } else {
@@ -130,7 +138,6 @@ export default {
             this.closeModal()
           })
           .catch((error) => {
-            console.error("myerror", error.data.errors)
             this.modalErrorMessage = error.data.errors
           })
       }
