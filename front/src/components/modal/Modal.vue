@@ -84,7 +84,7 @@ export default {
     title: String,
     initialData: Object,
     isItem: Boolean,
-    errorMessage: String,
+    errorMessage: Object,
   },
   data() {
     return {

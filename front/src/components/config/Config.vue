@@ -63,7 +63,7 @@ export default {
       isModalOpen: false,
       modalTitle: "",
       modalData: null,
-      modalErrorMessage: "",
+      modalErrorMessage: undefined,
       isItemModal: false,
     }
   },
@@ -101,14 +101,33 @@ export default {
       this.isModalOpen = true
       this.modalTitle = "Edit Room"
       this.modalData = room
-      this.modalErrorMessage = ""
+      this.modalErrorMessage = undefined
       this.isItemModal = false
     },
     openItemModal(item) {
       this.isModalOpen = true
       this.modalTitle = "Edit Item"
       this.modalData = item
-      this.modalErrorMessage = ""
+      this.modalErrorMessage = undefined
+      this.isItemModal = true
+    },
+    openNewRoomModal() {
+      this.isModalOpen = true
+      this.modalTitle = "New Room"
+      this.modalData = { name: "" }
+      this.modalErrorMessage = undefined
+      this.isItemModal = false
+    },
+    openNewItemModal() {
+      this.isModalOpen = true
+      this.modalTitle = "New Item"
+      this.modalData = {
+        name: "",
+        status: "",
+        type: "",
+        value: ""
+      }
+      this.modalErrorMessage = undefined
       this.isItemModal = true
     },
     closeModal() {
@@ -117,29 +136,52 @@ export default {
     },
     handleSave(data) {
       if (this.isItemModal) {
-        return coreApi.glados.changeEntityData(this.modalData.id, data)
-          .then((updatedEntity) => {
-            const index = this.entities.findIndex((entity) => entity.id === updatedEntity.id)
-            if (index !== -1) {
-              this.entities[index] = updatedEntity
-            }
-            this.closeModal()
-          })
-          .catch((error) => {
-            this.modalErrorMessage = error.data.errors
-          })
+        if (this.modalData.id) {
+          return coreApi.glados.changeEntityData(this.modalData.id, data)
+            .then((updatedEntity) => {
+              const index = this.entities.findIndex((entity) => entity.id === updatedEntity.id)
+              if (index !== -1) {
+                this.entities[index] = updatedEntity
+              }
+              this.closeModal()
+            })
+            .catch((error) => {
+              this.modalErrorMessage = error.data.errors
+            })
+        } else {
+          return coreApi.glados.createEntity(data)
+            .then((newEntity) => {
+              this.entities.push(newEntity)
+              this.closeModal()
+            })
+            .catch((error) => {
+              this.modalErrorMessage = error.data.errors
+            })
+        }
       } else {
-        return coreApi.glados.changeRoomData(this.modalData.id, data)
-          .then((updatedRoom) => {
-            const index = this.rooms.findIndex((room) => room.id === this.modalData.id)
-            if (index !== -1) {
-              this.rooms[index] = updatedRoom
-            }
-            this.closeModal()
-          })
-          .catch((error) => {
-            this.modalErrorMessage = error.data.errors
-          })
+        if (this.modalData.id) {
+          return coreApi.glados.changeRoomData(this.modalData.id, data)
+            .then((updatedRoom) => {
+              const index = this.rooms.findIndex((room) => room.id === this.modalData.id)
+              if (index !== -1) {
+                this.rooms[index] = updatedRoom
+              }
+              this.closeModal()
+            })
+            .catch((error) => {
+              this.modalErrorMessage = error.data.errors
+            })
+        } else {
+          console.log(data)
+          return coreApi.glados.createRoom(data)
+            .then((newRoom) => {
+              this.rooms.push(newRoom)
+              this.closeModal()
+            })
+            .catch((error) => {
+              this.modalErrorMessage = error.data.errors
+            })
+        }
       }
     },
   }
