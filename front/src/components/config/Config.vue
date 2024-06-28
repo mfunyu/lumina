@@ -1,11 +1,15 @@
 <template>
-  <div class="flex gap-5">
-    <div class="">
-      <p class="text-indigo-600 font-bold text-2xl">rooms</p>
-
+  <div class="flex flex-col gap-5">
+    <p class="px-5 text-indigo-600 font-bold text-2xl">rooms</p>
+    <div class="flex overflow-scroll">
+      <Room
+        v-for="room in rooms"
+        :key="room.id"
+        :room="room" />
     </div>
-    <div class="">
-      <p class="text-indigo-600 font-bold text-2xl">entities</p>
+    <hr class="border-gray-300 my-4" />
+    <p class="px-5 text-indigo-600 font-bold text-2xl">entities</p>
+    <div class="flex flex-wrap">
       <Item
         v-for="entity in entities"
         :key="entity.id"
@@ -17,10 +21,14 @@
 <script>
 import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
+import Room from "../cards/Room.vue"
 
 export default {
   name: "Config",
-  components: { Item },
+  components: {
+    Item,
+    Room
+  },
   created() {
     this.loadData()
   },
