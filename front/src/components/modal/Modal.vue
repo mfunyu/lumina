@@ -20,18 +20,25 @@
           <input
             v-model="status"
             class="w-full border border-gray-300 p-2 rounded-md"
-            type="text"
-            required />
+            type="text" />
         </div>
         <div
           v-if="isItem"
           class="mb-4">
-          <label class="block text-sm font-medium mb-1">Room ID</label>
-          <!-- <input
-            v-model="roomId"
+          <label class="block text-sm font-medium mb-1">Type</label>
+          <input
+            v-model="type"
             class="w-full border border-gray-300 p-2 rounded-md"
-            type="text"
-            required /> -->
+            type="text" />
+        </div>
+        <div
+          v-if="isItem"
+          class="mb-4">
+          <label class="block text-sm font-medium mb-1">Value</label>
+          <input
+            v-model="value"
+            class="w-full border border-gray-300 p-2 rounded-md"
+            type="text" />
         </div>
         <div class="flex justify-end gap-3">
           <Button
@@ -62,8 +69,9 @@ export default {
   data() {
     return {
       name: this.initialData?.name || "",
+      type: this.initialData?.type || "",
       status: this.initialData?.status || "",
-      roomId: this.initialData?.roomId || "",
+      value: this.initialData?.value || ""
     }
   },
   methods: {
@@ -74,12 +82,13 @@ export default {
       if (this.isItem) {
         this.$emit("save", {
           name: this.name,
+          type: this.type,
           status: this.status,
+          value: this.value,
         })
-      }   else {
+      } else {
         this.$emit("save", { name: this.name, })
       }
-      this.close()
     },
   },
   watch: {
@@ -87,6 +96,8 @@ export default {
       this.name = newData?.name || ""
       this.status = newData?.status || ""
       this.roomId = newData?.roomId || ""
+      this.value = newData?.value || ""
+      this.type = newData?.type || ""
     },
   },
 }

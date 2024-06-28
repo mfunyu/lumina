@@ -106,10 +106,22 @@ export default {
       console.log(data, this.modalData.id)
       if (this.isItemModal) {
         return coreApi.glados.changeEntityData(this.modalData.id, data)
+          .then(() => {
+            this.isModalOpen = false
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+
       } else {
         return coreApi.glados.changeRoomData(this.modalData.id, data)
+          .then(() => {
+            this.isModalOpen = false
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       }
-      
     },
   }
 }
