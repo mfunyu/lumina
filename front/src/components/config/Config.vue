@@ -106,17 +106,26 @@ export default {
       console.log(data, this.modalData.id)
       if (this.isItemModal) {
         return coreApi.glados.changeEntityData(this.modalData.id, data)
-          .then(() => {
+          .then((updatedEntity) => {
             this.isModalOpen = false
+            const index = this.entities.findIndex((entity) => entity.id === updatedEntity.id)
+            if (index !== -1) {
+              this.entities[index] = updatedEntity
+            }
+            console.log(this.entities, index)
           })
           .catch((error) => {
             console.error(error)
           })
-
       } else {
         return coreApi.glados.changeRoomData(this.modalData.id, data)
-          .then(() => {
+          .then((updatedRoom) => {
             this.isModalOpen = false
+            const index = this.rooms.findIndex((room) => room.id === this.modalData.id)
+            if (index !== -1) {
+              this.rooms[index] = updatedRoom
+            }
+            console.log(this.rooms, index)
           })
           .catch((error) => {
             console.error(error)
