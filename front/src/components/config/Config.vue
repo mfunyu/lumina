@@ -22,6 +22,7 @@
       :title="modalTitle"
       :initialData="modalData"
       :isItem="isItemModal"
+      :errorMessage="modalErrorMessage"
       @close="closeModal"
       @save="handleSave" />
   </div>
@@ -52,6 +53,7 @@ export default {
       isModalOpen: false,
       modalTitle: "",
       modalData: null,
+      modalErrorMessage: "",
       isItemModal: false,
     }
   },
@@ -89,6 +91,7 @@ export default {
       this.isModalOpen = true
       this.modalTitle = "Edit Room"
       this.modalData = room
+      this.modalErrorMessage = ""
       this.isItemModal = false
       console.log(this.modalData.id)
     },
@@ -96,6 +99,7 @@ export default {
       this.isModalOpen = true
       this.modalTitle = "Edit Item"
       this.modalData = item
+      this.modalErrorMessage = ""
       this.isItemModal = true
     },
     closeModal() {
@@ -103,32 +107,31 @@ export default {
       this.modalData = null
     },
     handleSave(data) {
-      console.log(data, this.modalData.id)
       if (this.isItemModal) {
         return coreApi.glados.changeEntityData(this.modalData.id, data)
           .then((updatedEntity) => {
-            this.isModalOpen = false
             const index = this.entities.findIndex((entity) => entity.id === updatedEntity.id)
             if (index !== -1) {
               this.entities[index] = updatedEntity
             }
-            console.log(this.entities, index)
+            this.closeModal()
           })
           .catch((error) => {
-            console.error(error)
+            console.error("myerror", error.data.errors)
+            this.modalErrorMessage = error.data.errors
           })
       } else {
         return coreApi.glados.changeRoomData(this.modalData.id, data)
           .then((updatedRoom) => {
-            this.isModalOpen = false
             const index = this.rooms.findIndex((room) => room.id === this.modalData.id)
             if (index !== -1) {
               this.rooms[index] = updatedRoom
             }
-            console.log(this.rooms, index)
+            this.closeModal()
           })
           .catch((error) => {
-            console.error(error)
+            console.error("myerror", error.data.errors)
+            this.modalErrorMessage = error.data.errors
           })
       }
     },

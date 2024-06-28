@@ -2,7 +2,7 @@
   <div
     v-if="isOpen"
     class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
-    <div class="bg-white p-6 rounded-md shadow-md">
+    <div class="bg-white p-6 rounded-md shadow-md w-2/4">
       <h2 class="text-xl font-bold mb-4">{{ title }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
@@ -40,6 +40,14 @@
             class="w-full border border-gray-300 p-2 rounded-md"
             type="text" />
         </div>
+        <div v-if="errorMessage">
+          <div
+            class="mb-4 text-red-600 overflow-wrap my-4 py-2 px-3 border border-red-600 rounded bg-red-100"
+            v-for="error of errorMessage"
+            :key="error">
+            {{ error[0] }}
+          </div>
+        </div>
         <div class="flex justify-end gap-3">
           <Button
             label="Close"
@@ -65,6 +73,7 @@ export default {
     title: String,
     initialData: Object,
     isItem: Boolean,
+    errorMessage: String,
   },
   data() {
     return {
