@@ -39,7 +39,7 @@
           :item="entity" />
       </div>
     </div>
-    <Speech :text="speechText"/>
+    <Speech :text="speechText()"/>
   </div>
 </template>
 

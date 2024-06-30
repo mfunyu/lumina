@@ -40,7 +40,6 @@ export default {
     toggleSpeech() {
       const speech = useSpeechSynthesis(this.text)
 
-      console.log("status", speech.status.value)
       if (this.isSpeaking) {
         window.speechSynthesis.pause()
         this.isSpeaking = false
