@@ -47,7 +47,6 @@
 import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
 import Speech from "@/components/speech/Speech.vue"
-import { useSpeechSynthesis } from "@vueuse/core"
 
 export default {
   name: "Dashboard",
@@ -66,6 +65,7 @@ export default {
       isError: false,
       currentRoomId: null,
       savedScrollPosition: 0,
+      text: "Hello. Wellcome to Glados Dashboard! These are the current status. "
     }
   },
   computed: {
@@ -74,14 +74,6 @@ export default {
     },
     inactiveClass() {
       return "text-gray-600 cursor-pointer hover:text-indigo-800 transition-colors duration-200 ease-in-out"
-    },
-    speechText() {
-      let text = "Hello. Wellcome to Glados Dashboard! This is the current status. "
-      console.log(this.entities)
-      for (const entity of this.entities) {
-        text += `${entity.name} is ${entity.status}. `
-      }
-      return text
     }
   },
   methods: {
@@ -174,21 +166,21 @@ export default {
         behavior: "smooth"
       })
     },
-    playTextToSpeech() {
-      let text = "Hello. Wellcome to Glados Dashboard! This is the current status. "
-      console.log(this.entities)
+    speechText() {
+      let text = this.text
+
+      if (this.currentRoomId) {
+        const roomName = this.rooms.find(room => room.id === this.currentRoomId)?.name
+        text += `In ${roomName}, `
+      }
+      if (this.entities.length === 0) {
+        text += "there is no entities registered. "
+      }
       for (const entity of this.entities) {
         text += `${entity.name} is ${entity.status}. `
       }
-
-      const speech = useSpeechSynthesis(text)
-      if (speech.status.value === "pause") {
-        console.log("resume")
-        window.speechSynthesis.resume()
-      }
-      else {
-        speech.speak()
-      }
+      this.text = ""
+      return text
     }
   }
 }
