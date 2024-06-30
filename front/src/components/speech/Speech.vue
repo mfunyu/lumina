@@ -1,10 +1,15 @@
 <template>
   <div
-    @click="playTextToSpeech"
+    @click="toggleSpeech"
     :class="[secondary ? secondaryClass : primaryClass]">
     <volumehigh
+      v-if="!isSpeaking"
       :size="24"
-      :class="[ secondary ? 'text-stone-600' : 'text-white']"/>
+      :class="[secondary ? 'text-stone-600' : 'text-white']"/>
+    <pause
+      v-else
+      :size="24"
+      :class="[secondary ? 'text-stone-600' : 'text-white']"/>
   </div>
 </template>
 
@@ -28,15 +33,23 @@ export default {
       return ""
     }
   },
+  data() {
+    return { isSpeaking: false }
+  },
   methods: {
-    playTextToSpeech() {
+    toggleSpeech() {
       const speech = useSpeechSynthesis(this.text)
-      if (speech.status.value === "pause") {
-        console.log("resume")
+
+      console.log("status", speech.status.value)
+      if (this.isSpeaking) {
+        window.speechSynthesis.pause()
+        this.isSpeaking = false
+      } else if (speech.status.value === "pause") {
         window.speechSynthesis.resume()
-      }
-      else {
+        this.isSpeaking = true
+      } else {
         speech.speak()
+        this.isSpeaking = true
       }
     }
   }
