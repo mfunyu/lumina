@@ -6,19 +6,22 @@
         :currentRoomId="currentRoomId"
         :getEntitiesByRoom="getEntitiesByRoom"/>
     </div>
-    <div
-      v-if="isLoading"
-      class="text-gray-600">Loading...</div>
-    <div
-      v-else-if="isError"
-      class="text-red-600">Error: failed to load data</div>
-    <div v-else>
-      <div class="flex flex-wrap">
-        <Item
-          @click="changeStatus(entity)"
-          v-for="entity in entities"
-          :key="entity.id"
-          :item="entity" />
+    <div class="flex">
+      <SideBar />
+      <div
+        v-if="isLoading"
+        class="text-gray-600">Loading...</div>
+      <div
+        v-else-if="isError"
+        class="text-red-600">Error: failed to load data</div>
+      <div v-else>
+        <div class="flex flex-wrap">
+          <Item
+            @click="changeStatus(entity)"
+            v-for="entity in entities"
+            :key="entity.id"
+            :item="entity" />
+        </div>
       </div>
     </div>
     <Speech :text="speechText()"/>
@@ -29,6 +32,7 @@
 import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
 import ScrolleBar from "@/components/dashboard/ScrolleBar.vue"
+import SideBar from "@/components/dashboard/SideBar.vue"
 import Speech from "@/components/speech/Speech.vue"
 
 export default {
@@ -36,6 +40,7 @@ export default {
   components: {
     Item,
     ScrolleBar,
+    SideBar,
     Speech
   },
   created() {
@@ -51,6 +56,7 @@ export default {
       text: "Hello. Wellcome to Glados Dashboard! These are the current status. "
     }
   },
+
   methods: {
     loadData() {
       this.isLoading = true
