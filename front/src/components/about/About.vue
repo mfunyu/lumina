@@ -1,6 +1,14 @@
 <template>
-  <div class="flex flex-col gap-5">
-    <span class="text-indigo-600 font-bold text-2xl">About</span>
+  <div
+    class="flex flex-col gap-5"
+    ref="content">
+    <div class="flex items-center gap-2">
+
+      <span class="text-indigo-600 font-bold text-2xl">About</span>
+      <Speech
+        :text="speechText"
+        :secondary="true"/>
+    </div>
     <div class="flex flex-col gap-2 text-lg">
       <p>
         A potato cannon is a pipe-based cannon that uses air pressure (pneumatic), or combustion of a flammable gas (aerosol, propane, etc.), to launch projectiles at high speeds. They are built to fire chunks of potato, as a hobby, or to fire other sorts of projectiles, for practical use. Projectiles or failing guns can be dangerous and result in life-threatening injuries, including cranial fractures, enucleation, and blindness if a person is hit.<br>
@@ -48,8 +56,27 @@
       </p>
     </div>
   </div>
+  <Speech :text="speechText" />
 </template>
 
 <script>
-export default { name: "About" }
+import Speech from "@/components/speech/Speech"
+
+export default {
+  name: "About",
+  components: { Speech },
+  data() {
+    return { speechText: "This is About page. ", }
+  },
+  mounted() {
+    this.extractTextContent()
+  },
+  methods: {
+    extractTextContent() {
+      const content = this.$refs.content
+      console.log(content)
+      this.speechText += content?.innerText || content?.textContent
+    },
+  },
+}
 </script>

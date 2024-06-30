@@ -39,16 +39,21 @@
           :item="entity" />
       </div>
     </div>
+    <Speech :text="speechText()"/>
   </div>
 </template>
 
 <script>
 import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
+import Speech from "@/components/speech/Speech.vue"
 
 export default {
   name: "Dashboard",
-  components: { Item },
+  components: {
+    Item,
+    Speech
+  },
   created() {
     this.loadData()
   },
@@ -60,6 +65,7 @@ export default {
       isError: false,
       currentRoomId: null,
       savedScrollPosition: 0,
+      text: "Hello. Wellcome to Glados Dashboard! These are the current status. "
     }
   },
   computed: {
@@ -159,6 +165,22 @@ export default {
         left: 150,
         behavior: "smooth"
       })
+    },
+    speechText() {
+      let text = this.text
+
+      if (this.currentRoomId) {
+        const roomName = this.rooms.find(room => room.id === this.currentRoomId)?.name
+        text += `In ${roomName}, `
+      }
+      if (this.entities.length === 0) {
+        text += "there is no entities registered. "
+      }
+      for (const entity of this.entities) {
+        text += `${entity.name} is ${entity.status}. `
+      }
+      this.text = ""
+      return text
     }
   }
 }

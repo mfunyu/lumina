@@ -1,7 +1,12 @@
 <template>
   <div class="flex flex-col gap-5">
     <div class="flex items-center justify-between px-5">
-      <p class="text-indigo-600 font-bold text-2xl">rooms</p>
+      <div class="flex items-center gap-2">
+        <p class="text-indigo-600 font-bold text-2xl">rooms</p>
+        <Speech
+          :text="roomSpeechText"
+          :secondary="true"/>
+      </div>
       <button
         @click="openNewRoomModal"
         class="text-indigo-600 font-bold text-3xl">+</button>
@@ -17,7 +22,12 @@
     </div>
     <hr class="border-gray-300 my-4" />
     <div class="flex items-center justify-between px-5">
-      <p class="text-indigo-600 font-bold text-2xl">entities</p>
+      <div class="flex items-center gap-2">
+        <p class="text-indigo-600 font-bold text-2xl">entities</p>
+        <Speech
+          :text="itemSpeechText"
+          :secondary="true"/>
+      </div>
       <button
         @click="openNewItemModal"
         class="text-indigo-600 font-bold text-3xl">+</button>
@@ -40,6 +50,7 @@
       :rooms="rooms"
       @close="closeModal"
       @save="handleSave" />
+    <Speech :text="speechText" />
   </div>
 </template>
 
@@ -48,13 +59,15 @@ import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
 import Modal from "@/components/modal/Modal.vue"
 import Room from "@/components/cards/Room.vue"
+import Speech from "@/components/speech/Speech.vue"
 
 export default {
   name: "Config",
   components: {
     Item,
     Room,
-    Modal
+    Modal,
+    Speech
   },
   created() {
     this.loadData()
@@ -70,6 +83,26 @@ export default {
       modalData: null,
       modalErrorMessage: undefined,
       isItemModal: false,
+    }
+  },
+  computed: {
+    speechText() {
+      let text = "Hello. Wellcome to Glados Configuration! You can modify rooms and entities here. "
+      return text
+    },
+    roomSpeechText() {
+      let text = "These are current rooms. "
+      for (const room of this.rooms) {
+        text += `${room.name} `
+      }
+      return text
+    },
+    itemSpeechText() {
+      let text = "These are current entities. "
+      for (const entity of this.entities) {
+        text += `${entity.name} is ${entity.status}. `
+      }
+      return text
     }
   },
   methods: {
