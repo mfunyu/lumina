@@ -32,14 +32,20 @@
         @click="openNewItemModal"
         class="text-indigo-600 font-bold text-3xl">+</button>
     </div>
-    <div class="flex flex-wrap">
-      <Item
-        @click="openItemModal(entity)"
-        @delete="deleteEntity(entity.id)"
-        v-for="entity in entities"
-        :deleteEnabled="true"
-        :key="entity.id"
-        :item="entity" />
+    <div class="flex items-start">
+      <SideBar :setCategoryFilter="setCategoryFilter"/>
+      <div class="flex flex-wrap items-stretch">
+        <div
+          v-for="entity in entities"
+          :key="entity.id" >
+          <Item
+            v-if="!currentFilter || entity.type === currentFilter"
+            @click="openItemModal(entity)"
+            @delete="deleteEntity(entity.id)"
+            :deleteEnabled="true"
+            :item="entity" />
+        </div>
+      </div>
     </div>
     <Modal
       v-if="isModalOpen"
@@ -59,6 +65,7 @@ import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
 import Modal from "@/components/modal/Modal.vue"
 import Room from "@/components/cards/Room.vue"
+import SideBar from "@/components/dashboard/SideBar.vue"
 import Speech from "@/components/speech/Speech.vue"
 
 export default {
@@ -67,6 +74,7 @@ export default {
     Item,
     Room,
     Modal,
+    SideBar,
     Speech
   },
   created() {
@@ -83,6 +91,7 @@ export default {
       modalData: null,
       modalErrorMessage: undefined,
       isItemModal: false,
+      currentFilter: "",
     }
   },
   computed: {
@@ -239,6 +248,9 @@ export default {
         .catch((error) => {
           console.error(error)
         })
+    },
+    setCategoryFilter(category) {
+      this.currentFilter = category
     }
   }
 }
