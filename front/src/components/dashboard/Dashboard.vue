@@ -39,24 +39,22 @@
           :item="entity" />
       </div>
     </div>
-    <div
-      @click="playTextToSpeech"
-      class="fixed bottom-10 right-10 bg-indigo-500 text-white border-none rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-indigo-600 cursor-pointer transition-colors duration-300">
-      <volumehigh
-        :size="24"
-        class="text-white" />
-    </div>
+    <Speech :text="speechText"/>
   </div>
 </template>
 
 <script>
 import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
+import Speech from "@/components/speech/Speech.vue"
 import { useSpeechSynthesis } from "@vueuse/core"
 
 export default {
   name: "Dashboard",
-  components: { Item },
+  components: {
+    Item,
+    Speech
+  },
   created() {
     this.loadData()
   },
@@ -76,6 +74,14 @@ export default {
     },
     inactiveClass() {
       return "text-gray-600 cursor-pointer hover:text-indigo-800 transition-colors duration-200 ease-in-out"
+    },
+    speechText() {
+      let text = "Hello. Wellcome to Glados Dashboard! This is the current status. "
+      console.log(this.entities)
+      for (const entity of this.entities) {
+        text += `${entity.name} is ${entity.status}. `
+      }
+      return text
     }
   },
   methods: {
