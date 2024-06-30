@@ -5,6 +5,7 @@ import LightBulb from "vue-material-design-icons/Lightbulb.vue"
 import LightbulbOutline from "vue-material-design-icons/LightbulbOutline.vue"
 import LightSwitch from "vue-material-design-icons/LightSwitch.vue"
 import LightSwitchOff from "vue-material-design-icons/LightSwitchOff.vue"
+import Pause from "vue-material-design-icons/Pause.vue"
 import VolumeHigh from "vue-material-design-icons/VolumeHigh.vue"
 
 export default {
@@ -15,5 +16,6 @@ export default {
     app.component('lightswitch', LightSwitch);
     app.component('lightswitchoff', LightSwitchOff);
     app.component('volumehigh', VolumeHigh);
+    app.component('pause', Pause);
   }
 }
