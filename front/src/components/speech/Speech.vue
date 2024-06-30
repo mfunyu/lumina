@@ -1,10 +1,10 @@
 <template>
   <div
     @click="playTextToSpeech"
-    :class="[{secondaryClass: secondary}, primaryClass]">
+    :class="[secondary ? secondaryClass : primaryClass]">
     <volumehigh
       :size="24"
-      :class="[ secondary ? 'text-gray' : 'text-white']"/>
+      :class="[ secondary ? 'text-stone-600' : 'text-white']"/>
   </div>
 </template>
 
@@ -17,8 +17,8 @@ export default {
     text: String,
     secondary: {
       type: Boolean,
-      default: false 
-    } 
+      default: false
+    }
   },
   computed: {
     primaryClass() {
