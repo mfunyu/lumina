@@ -142,7 +142,12 @@ export default {
       if (this.entities.length === 0) {
         text += "there is no entities registered. "
       }
+      if (this.currentFilter) {
+        text += `filtering ${this.currentFilter} entities. `
+      }
       for (const entity of this.entities) {
+        if (this.currentFilter && entity.type !== this.currentFilter)
+          continue
         text += `${entity.name} is ${entity.status}. `
       }
       this.text = ""

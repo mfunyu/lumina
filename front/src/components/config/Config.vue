@@ -108,7 +108,12 @@ export default {
     },
     itemSpeechText() {
       let text = "These are current entities. "
+      if (this.currentFilter) {
+        text += `Filtering by ${this.currentFilter}. `
+      }
       for (const entity of this.entities) {
+        if (this.currentFilter && entity.type !== this.currentFilter)
+          continue
         text += `${entity.name} is ${entity.status}. `
       }
       return text
