@@ -1,28 +1,10 @@
 <template>
   <div class="flex flex-col gap-5">
     <div class="relative flex items-center">
-      <div
-        class="flex gap-10 p-3 overflow-hidden px-10"
-        ref="scrollContainer">
-        <button
-          @click="scrollLeft"
-          class="absolute left-0 z-10 bg-white px-2 text-2xl text-grey-800">
-          &lt;
-        </button>
-        <div
-          v-for="room in rooms"
-          :key="room.id">
-          <span
-            @click="getEntitiesByRoom(room.id)"
-            class="text-xl whitespace-nowrap"
-            :class="[ room.id === currentRoomId ? activeClass : inactiveClass ]">{{ room.name }}</span>
-        </div>
-        <button
-          @click="scrollRight"
-          class="absolute right-0 z-10 bg-white px-2 text-2xl text-grey-800">
-          &gt;
-        </button>
-      </div>
+      <ScrolleBar
+        :rooms="rooms"
+        :currentRoomId="currentRoomId"
+        :getEntitiesByRoom="getEntitiesByRoom"/>
     </div>
     <div
       v-if="isLoading"
@@ -46,12 +28,14 @@
 <script>
 import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
+import ScrolleBar from "@/components/dashboard/ScrolleBar.vue"
 import Speech from "@/components/speech/Speech.vue"
 
 export default {
   name: "Dashboard",
   components: {
     Item,
+    ScrolleBar,
     Speech
   },
   created() {
@@ -63,17 +47,8 @@ export default {
       rooms: [],
       isLoading: false,
       isError: false,
-      currentRoomId: null,
-      savedScrollPosition: 0,
+      currentRoomId: "",
       text: "Hello. Wellcome to Glados Dashboard! These are the current status. "
-    }
-  },
-  computed: {
-    activeClass() {
-      return "text-indigo-600 cursor-default font-bold border-b-2 border-indigo-600 transition-colors duration-200 ease-in-out"
-    },
-    inactiveClass() {
-      return "text-gray-600 cursor-pointer hover:text-indigo-800 transition-colors duration-200 ease-in-out"
     }
   },
   methods: {
@@ -107,10 +82,9 @@ export default {
         })
     },
     getEntitiesByRoom(roomId) {
-      this.saveScrollPosition()
       if (this.currentRoomId === roomId) {
         this.getEntities()
-        this.currentRoomId = null
+        this.currentRoomId = ""
         return
       }
 
@@ -127,7 +101,6 @@ export default {
         })
         .finally(() => {
           this.isLoading = false
-          this.restoreScrollPosition()
         })
     },
     changeStatus(entity) {
@@ -145,26 +118,6 @@ export default {
           console.error(error)
           this.isError = true
         })
-    },
-    saveScrollPosition() {
-      this.savedScrollPosition = this.$refs.scrollContainer.scrollLeft
-    },
-    restoreScrollPosition() {
-      this.$nextTick(() => {
-        this.$refs.scrollContainer.scrollLeft = this.savedScrollPosition
-      })
-    },
-    scrollLeft() {
-      this.$refs.scrollContainer.scrollBy({
-        left: -150,
-        behavior: "smooth"
-      })
-    },
-    scrollRight() {
-      this.$refs.scrollContainer.scrollBy({
-        left: 150,
-        behavior: "smooth"
-      })
     },
     speechText() {
       let text = this.text
