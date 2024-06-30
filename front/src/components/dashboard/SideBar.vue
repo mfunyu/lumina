@@ -1,10 +1,9 @@
 <template>
-  <div class="flex flex-col m-3 items-center p-4 bg-stone-100 rounded-2xl">
+  <div class="flex flex-col gap-5 m-3 items-center p-4 py-6 bg-stone-100 rounded-2xl">
     <div
       v-for="category in categories"
       :key="category"
-      @click="filterByCategory(category)"
-      class="mb-5">
+      @click="onClickCategory(category)">
       <component
         :is="getIconCategory(category)"
         :size="30"
@@ -16,6 +15,12 @@
 <script>
 export default {
   name: "SideBar",
+  props: {
+    setCategoryFilter: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     return { currentCategory: "" }
   },
@@ -31,7 +36,13 @@ export default {
     }
   },
   methods: {
-    filterByCategory(category) {
+    onClickCategory(category) {
+      if (this.currentCategory === category) {
+        this.setCategoryFilter("")
+        this.currentCategory = ""
+        return
+      }
+      this.setCategoryFilter(category)
       this.currentCategory = category
     },
     getIconCategory(category) {

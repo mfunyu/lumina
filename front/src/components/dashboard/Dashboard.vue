@@ -6,8 +6,8 @@
         :currentRoomId="currentRoomId"
         :getEntitiesByRoom="getEntitiesByRoom"/>
     </div>
-    <div class="flex">
-      <SideBar />
+    <div class="flex items-start">
+      <SideBar :setCategoryFilter="setCategoryFilter"/>
       <div
         v-if="isLoading"
         class="text-gray-600">Loading...</div>
@@ -15,12 +15,15 @@
         v-else-if="isError"
         class="text-red-600">Error: failed to load data</div>
       <div v-else>
-        <div class="flex flex-wrap">
-          <Item
-            @click="changeStatus(entity)"
+        <div class="flex flex-wrap items-stretch">
+          <div
             v-for="entity in entities"
-            :key="entity.id"
-            :item="entity" />
+            :key="entity.id" >
+            <Item
+              v-if="!currentFilter || entity.type === currentFilter"
+              @click="changeStatus(entity)"
+              :item="entity" />
+          </div>
         </div>
       </div>
     </div>
@@ -53,6 +56,7 @@ export default {
       isLoading: false,
       isError: false,
       currentRoomId: "",
+      currentFilter: "",
       text: "Hello. Wellcome to Glados Dashboard! These are the current status. "
     }
   },
@@ -124,6 +128,9 @@ export default {
           console.error(error)
           this.isError = true
         })
+    },
+    setCategoryFilter(category) {
+      this.currentFilter = category
     },
     speechText() {
       let text = this.text

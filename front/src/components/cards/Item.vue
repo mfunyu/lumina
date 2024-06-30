@@ -1,5 +1,5 @@
 <template>
-  <div class="item-container relative flex m-3 py-2 px-5 rounded-md bg-stone-100 shadow-sm">
+  <div class="item-container flex-grow relative flex m-3 py-2 px-5 rounded-md bg-stone-100 shadow-sm">
     <div>
       <button
         v-if="deleteEnabled"
@@ -89,9 +89,8 @@ export default {
 
 <style scoped>
 .item-container {
-  width: 25%;
-  /* Set your desired width */
-  min-width: 200px;
+  width: 20%;
+  min-width: 250px;
   justify-content: space-between;
 }
 
