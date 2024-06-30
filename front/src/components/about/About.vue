@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col gap-5">
+  <div
+    class="flex flex-col gap-5"
+    ref="content">
     <span class="text-indigo-600 font-bold text-2xl">About</span>
     <div class="flex flex-col gap-2 text-lg">
       <p>
@@ -48,8 +50,27 @@
       </p>
     </div>
   </div>
+  <Speech :text="speechText" />
 </template>
 
 <script>
-export default { name: "About" }
+import Speech from "@/components/speech/Speech"
+
+export default {
+  name: "About",
+  components: { Speech },
+  data() {
+    return { speechText: "", }
+  },
+  mounted() {
+    this.extractTextContent()
+  },
+  methods: {
+    extractTextContent() {
+      const content = this.$refs.content
+      console.log(content)
+      this.speechText = content?.innerText || content?.textContent
+    },
+  },
+}
 </script>
