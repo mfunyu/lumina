@@ -1,36 +1,36 @@
 <template>
   <div class="flex flex-col gap-5">
-    <div
-      v-if="isLoading"
-      class="text-gray-600">Loading...</div>
-    <div
-      v-else-if="isError"
-      class="text-red-600">Error loading data</div>
-    <div v-else>
-      <div class="relative flex items-center">
+    <div class="relative flex items-center">
+      <div
+        class="flex gap-10 p-3 overflow-hidden px-10"
+        ref="scrollContainer">
         <button
           @click="scrollLeft"
           class="absolute left-0 z-10 bg-white px-2 text-2xl text-grey-800">
           &lt;
         </button>
         <div
-          class="flex gap-10 p-3 overflow-hidden px-10"
-          ref="scrollContainer">
-          <div
-            v-for="room in rooms"
-            :key="room.id">
-            <span
-              @click="getEntitiesByRoom(room.id)"
-              class="text-xl whitespace-nowrap"
-              :class="[ room.id === currentRoomId ? activeClass : inactiveClass ]">{{ room.name }}</span>
-          </div>
-          <button
-            @click="scrollRight"
-            class="absolute right-0 z-10 bg-white px-2 text-2xl text-grey-800">
-            &gt;
-          </button>
+          v-for="room in rooms"
+          :key="room.id">
+          <span
+            @click="getEntitiesByRoom(room.id)"
+            class="text-xl whitespace-nowrap"
+            :class="[ room.id === currentRoomId ? activeClass : inactiveClass ]">{{ room.name }}</span>
         </div>
+        <button
+          @click="scrollRight"
+          class="absolute right-0 z-10 bg-white px-2 text-2xl text-grey-800">
+          &gt;
+        </button>
       </div>
+    </div>
+    <div
+      v-if="isLoading"
+      class="text-gray-600">Loading...</div>
+    <div
+      v-else-if="isError"
+      class="text-red-600">Error: failed to load data</div>
+    <div v-else>
       <div class="flex flex-wrap">
         <Item
           @click="changeStatus(entity)"
