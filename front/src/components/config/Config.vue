@@ -41,6 +41,7 @@
       @close="closeModal"
       @save="handleSave" />
   </div>
+  <Speech :text="speechText" />
 </template>
 
 <script>
@@ -48,13 +49,15 @@ import coreApi from "@/providers/core-api"
 import Item from "@/components/cards/Item"
 import Modal from "@/components/modal/Modal.vue"
 import Room from "@/components/cards/Room.vue"
+import Speech from "@/components/speech/Speech.vue"
 
 export default {
   name: "Config",
   components: {
     Item,
     Room,
-    Modal
+    Modal,
+    Speech
   },
   created() {
     this.loadData()
@@ -70,6 +73,12 @@ export default {
       modalData: null,
       modalErrorMessage: undefined,
       isItemModal: false,
+    }
+  },
+  computed: {
+    speechText() {
+      let text = "Hello. Wellcome to Glados Configuration! You can modify rooms and entities here. "
+      return text
     }
   },
   methods: {
