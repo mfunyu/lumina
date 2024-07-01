@@ -12,7 +12,10 @@ This innovative solution aims to transform how we interact with and manage our h
 
 ## Usage
 
-
+| Dashboard | Config | About |
+| :--: | :--: | :--: |
+| <img width="479" alt="Capture d’écran 2024-07-01 à 11 33 26" src="https://github.com/mfunyu/glados/assets/60470877/699f2b77-8fa5-40de-82d3-eead215b7953"> | <img width="476" alt="Capture d’écran 2024-07-01 à 11 30 35" src="https://github.com/mfunyu/glados/assets/60470877/73acb0c5-2626-4375-bed0-559875ef94d1"> | <img width="475" alt="Capture d’écran 2024-07-01 à 11 28 53" src="https://github.com/mfunyu/glados/assets/60470877/72d7fe8d-a377-489e-adc6-71ebdee9ad9e"> |
+| <img width="479" alt="Capture d’écran 2024-07-01 à 11 28 34" src="https://github.com/mfunyu/glados/assets/60470877/d651efdb-f784-43b8-9a62-2b2aa93c788e"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 10" src="https://github.com/mfunyu/glados/assets/60470877/a22c2a35-3e1a-41b1-936f-61739b9c3165"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 28" src="https://github.com/mfunyu/glados/assets/60470877/615f50a4-2256-4e6b-a206-45653cfd4004">
 
 ## ⚙️Installation
 
