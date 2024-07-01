@@ -4,6 +4,12 @@
 
 # 🏘️💡Glados
 
+Glados is an advanced system **designed to connect homes worldwide**, making them **autonomous and highly efficient**. It enhances convenience by automating tasks, controlling home environments remotely, and providing custom routines for users.
+
+Glados optimizes energy usage, promotes the use of renewable energy, and encourages environmental responsibility. It also focuses on safety and accessibility, offering assistance to individuals with disabilities or the elderly and monitoring the health and safety of all residents.
+
+This innovative solution aims to transform how we interact with and manage our homes, creating a smarter, greener, and more inclusive living environment.
+
 ## Installation
 
 ### Steps
