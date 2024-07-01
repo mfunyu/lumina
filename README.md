@@ -4,6 +4,27 @@
 
 # 🏘️💡Glados
 
+## Installation
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mfunyu/glados.git
+   ```
+
+2. Set environment variables
+   ```
+   make setup
+   ```
+
+3. Start the docker containers:
+   ```
+   make
+   ```
+
+4. Access from a browser: https://localhost:8080
+
+
 
 ## Planning
 
