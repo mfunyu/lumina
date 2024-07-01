@@ -10,7 +10,11 @@ Glados optimizes energy usage, promotes the use of renewable energy, and encoura
 
 This innovative solution aims to transform how we interact with and manage our homes, creating a smarter, greener, and more inclusive living environment.
 
-## Installation
+## Usage
+
+
+
+## ⚙️Installation
 
 ### Steps
 1. Clone the repository:
@@ -32,7 +36,7 @@ This innovative solution aims to transform how we interact with and manage our h
 
 
 
-## Planning
+## Development Planning
 
 | Étape                         | Description                                    | Jour       | Estimated Time       |
 |-------------------------------|------------------------------------------------|------------|----------------------|
