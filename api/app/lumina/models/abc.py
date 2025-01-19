@@ -6,7 +6,7 @@ import numpy
 from psycopg2.extensions import register_adapter, AsIs
 from sqlalchemy import inspect
 
-from glados import db
+from lumina import db
 
 
 class BaseModel:

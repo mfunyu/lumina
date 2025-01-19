@@ -57,7 +57,7 @@ export default {
       isError: false,
       currentRoomId: "",
       currentFilter: "",
-      text: "Hello. Wellcome to Glados Dashboard! These are the current status. "
+      text: "Hello. Wellcome to Lumina Dashboard! These are the current status. "
     }
   },
 
@@ -72,7 +72,7 @@ export default {
         })
     },
     getEntities() {
-      return coreApi.glados.getEntities()
+      return coreApi.lumina.getEntities()
         .then((entities) => {
           this.entities = entities
         })
@@ -82,7 +82,7 @@ export default {
         })
     },
     getRooms() {
-      return coreApi.glados.getRooms()
+      return coreApi.lumina.getRooms()
         .then((rooms) => {
           this.rooms = rooms
         })
@@ -101,7 +101,7 @@ export default {
       this.currentRoomId = roomId
       this.isLoading = true
 
-      coreApi.glados.getEntitiesByRoom(roomId)
+      coreApi.lumina.getEntitiesByRoom(roomId)
         .then((entities) => {
           this.entities = entities
         })
@@ -117,7 +117,7 @@ export default {
       if (entity.status == "unavailable")
         return
       const newStatus = entity.status === "on" ? "off" : "on"
-      coreApi.glados.changeEntityData(entity.id, { status: newStatus })
+      coreApi.lumina.changeEntityData(entity.id, { status: newStatus })
         .then((updatedEntity) => {
           const index = this.entities.findIndex(e => e.id === entity.id)
           if (index !== -1) {

@@ -1,4 +1,4 @@
-# glados-back
+# lumina-back
 
 ## Prerequisite:
 - Python 3
@@ -81,5 +81,5 @@ system: `PostgreSQL`
 server: `db`
 username: `postgres`
 password: `root`
-database: `glados`
+database: `lumina`
 ```

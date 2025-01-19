@@ -1,7 +1,7 @@
 import uuid
 import pytest
 
-from glados.models import Room
+from lumina.models import Room
 
 
 mimetype = 'application/json'

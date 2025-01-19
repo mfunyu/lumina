@@ -1,3 +1,3 @@
-import GladosProvider from "./GladosProvider"
+import LuminaProvider from "./LuminaProvider"
 
-export default { glados: GladosProvider }
+export default { lumina: LuminaProvider }

@@ -1,6 +1,6 @@
 import pytest
 
-from glados import create_app, db
+from lumina import create_app, db
 
 
 @pytest.fixture(scope="session")

@@ -1,8 +1,8 @@
 from flask import request
 from flask_restful import Resource
 
-from glados.api.entity.serializers import EntitiesRequestSerializer, EntityResponseSerializer, EntityCreateSerializer, EntityUpdateSerializer, EntityIdSerializer
-from glados.repositories.entities import get_entities, add_entity, update_entity, delete_entity
+from lumina.api.entity.serializers import EntitiesRequestSerializer, EntityResponseSerializer, EntityCreateSerializer, EntityUpdateSerializer, EntityIdSerializer
+from lumina.repositories.entities import get_entities, add_entity, update_entity, delete_entity
 
 
 class EntitiesAPI(Resource):

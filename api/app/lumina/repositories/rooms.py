@@ -1,4 +1,4 @@
-from glados.models import Room
+from lumina.models import Room
 from sqlalchemy import asc
 
 

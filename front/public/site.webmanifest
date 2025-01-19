@@ -1,6 +1,6 @@
 {
-    "name": "Glados",
-    "short_name": "glados",
+    "name": "Lumina",
+    "short_name": "lumina",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -10,7 +10,7 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "start_url": "https://glados.fr",
+    "start_url": "https://lumina.fr",
     "display": "standalone",
     "orientation": "landscape"
 }

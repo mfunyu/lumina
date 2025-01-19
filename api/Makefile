@@ -27,7 +27,7 @@ lint:
 	flake8
 
 db:
-	docker-compose exec db psql -U postgres -d glados
+	docker-compose exec db psql -U postgres -d lumina
 
 db_history:
 	docker-compose run --rm server flask db history

@@ -1,12 +1,12 @@
-[README](README.md) • [Concept & Design (en)](CONCEPT.md) • [Subject (fr)](PDF.pdf)
+[README](README.md) • [Concept & Design (en)](CONCEPT.md)
 
 [![wakatime](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/0628c6fd-9ef4-4bec-b62d-ead7a5acae4c.svg)](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/0628c6fd-9ef4-4bec-b62d-ead7a5acae4c)
 
-# 🏘️💡Glados
+# 🏘️💡Lumina
 
-Glados is an advanced system **designed to connect homes worldwide**, making them **autonomous and highly efficient**. It enhances convenience by automating tasks, controlling home environments remotely, and providing custom routines for users.
+Lumina is an advanced system **designed to connect homes worldwide**, making them **autonomous and highly efficient**. It enhances convenience by automating tasks, controlling home environments remotely, and providing custom routines for users.
 
-Glados optimizes energy usage, promotes the use of renewable energy, and encourages environmental responsibility. It also focuses on safety and accessibility, offering assistance to individuals with disabilities or the elderly and monitoring the health and safety of all residents.
+Lumina optimizes energy usage, promotes the use of renewable energy, and encourages environmental responsibility. It also focuses on safety and accessibility, offering assistance to individuals with disabilities or the elderly and monitoring the health and safety of all residents.
 
 This innovative solution aims to transform how we interact with and manage our homes, creating a smarter, greener, and more inclusive living environment.
 
@@ -14,15 +14,15 @@ This innovative solution aims to transform how we interact with and manage our h
 
 | Dashboard | Config | About |
 | :--: | :--: | :--: |
-| <img width="479" alt="Capture d’écran 2024-07-01 à 11 33 26" src="https://github.com/mfunyu/glados/assets/60470877/699f2b77-8fa5-40de-82d3-eead215b7953"> | <img width="476" alt="Capture d’écran 2024-07-01 à 11 30 35" src="https://github.com/mfunyu/glados/assets/60470877/73acb0c5-2626-4375-bed0-559875ef94d1"> | <img width="475" alt="Capture d’écran 2024-07-01 à 11 28 53" src="https://github.com/mfunyu/glados/assets/60470877/72d7fe8d-a377-489e-adc6-71ebdee9ad9e"> |
-| <img width="479" alt="Capture d’écran 2024-07-01 à 11 28 34" src="https://github.com/mfunyu/glados/assets/60470877/d651efdb-f784-43b8-9a62-2b2aa93c788e"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 10" src="https://github.com/mfunyu/glados/assets/60470877/a22c2a35-3e1a-41b1-936f-61739b9c3165"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 28" src="https://github.com/mfunyu/glados/assets/60470877/615f50a4-2256-4e6b-a206-45653cfd4004">
+| <img width="479" alt="Capture d’écran 2024-07-01 à 11 33 26" src="https://github.com/mfunyu/lumina/assets/60470877/699f2b77-8fa5-40de-82d3-eead215b7953"> | <img width="476" alt="Capture d’écran 2024-07-01 à 11 30 35" src="https://github.com/mfunyu/lumina/assets/60470877/73acb0c5-2626-4375-bed0-559875ef94d1"> | <img width="475" alt="Capture d’écran 2024-07-01 à 11 28 53" src="https://github.com/mfunyu/lumina/assets/60470877/72d7fe8d-a377-489e-adc6-71ebdee9ad9e"> |
+| <img width="479" alt="Capture d’écran 2024-07-01 à 11 28 34" src="https://github.com/mfunyu/lumina/assets/60470877/d651efdb-f784-43b8-9a62-2b2aa93c788e"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 10" src="https://github.com/mfunyu/lumina/assets/60470877/a22c2a35-3e1a-41b1-936f-61739b9c3165"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 28" src="https://github.com/mfunyu/lumina/assets/60470877/615f50a4-2256-4e6b-a206-45653cfd4004">
 
 ## ⚙️Installation
 
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/mfunyu/glados.git
+   git clone https://github.com/mfunyu/lumina.git
    ```
 
 2. Set environment variables

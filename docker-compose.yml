@@ -2,9 +2,9 @@ services:
   db:
     image: postgres:13
     volumes:
-      - db_glados:/var/lib/postgresql/data
+      - db_lumina:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_NAME:-glados}
+      - POSTGRES_DB=${DB_NAME:-lumina}
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
 
@@ -17,11 +17,11 @@ services:
       - db
 
   server:
-    image: 'glados/api'
+    image: 'lumina/api'
     build:
       context: api
       cache_from:
-        - 'glados/api'
+        - 'lumina/api'
     command: flask run --host 0.0.0.0
     volumes:
       - ./api/app:/app
@@ -33,11 +33,11 @@ services:
       - db
 
   front:
-    image: 'glados/front'
+    image: 'lumina/front'
     build:
       context: front
       cache_from:
-        - 'glados/front'
+        - 'lumina/front'
     command: npm run serve
     volumes:
       - ./front:/front
@@ -47,4 +47,4 @@ services:
       - ${FRONT_PORT:-8080}:8080
 
 volumes:
-  db_glados:
+  db_lumina:

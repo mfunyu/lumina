@@ -1,9 +1,9 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from glados.api.misc import resources as misc_resources
-from glados.api.entity import resources as entity_resources
-from glados.api.room import resources as room_resources
+from lumina.api.misc import resources as misc_resources
+from lumina.api.entity import resources as entity_resources
+from lumina.api.room import resources as room_resources
 
 blueprint = Blueprint("api", __name__)
 api = Api(blueprint)

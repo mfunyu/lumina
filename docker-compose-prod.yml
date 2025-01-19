@@ -2,19 +2,17 @@ services:
   db:
     image: postgres:13
     volumes:
-      - db_glados:/var/lib/postgresql/data
+      - db_lumina:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_NAME:-glados}
+      - POSTGRES_DB=${DB_NAME:-lumina}
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
 
   server:
-    image: 'glados/api'
+    image: 'lumina/api'
     build:
       context: api
     command: gunicorn run:app -w 2 --threads 2 -b 0.0.0.0:${SERVER_PORT:-5000}
-    volumes:
-      - ./api/app:/app
     ports:
       - ${SERVER_PORT:-5000}:5000
     env_file:
@@ -23,16 +21,14 @@ services:
       - db
 
   front:
-    image: 'glados/front'
+    image: 'lumina/front'
     build:
       context: front
     command: npm run serve
-    volumes:
-      - ./front:/front
     env_file:
       - ./front/.env
     ports:
       - ${FRONT_PORT:-8080}:8080
 
 volumes:
-  db_glados:
+  db_lumina:

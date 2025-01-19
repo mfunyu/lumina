@@ -2,18 +2,18 @@ services:
   db_test:
     image: postgres:13
     volumes:
-      - db_glados_test:/var/lib/postgresql/data
+      - db_lumina_test:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_TEST_NAME:-glados}
+      - POSTGRES_DB=${DB_TEST_NAME:-lumina}
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
 
   server:
-    image: 'glados/api'
+    image: 'lumina/api'
     build:
       context: .
       cache_from:
-        - 'glados/api'
+        - 'lumina/api'
     volumes:
       - ./app:/app
     ports:
@@ -24,4 +24,4 @@ services:
       - db_test
 
 volumes:
-  db_glados_test:
+  db_lumina_test:

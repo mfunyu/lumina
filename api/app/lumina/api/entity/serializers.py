@@ -1,7 +1,7 @@
 from marshmallow import fields, validate, validates, ValidationError
 
-from glados import ma, constants
-from glados.models import Entity, Room
+from lumina import ma, constants
+from lumina.models import Entity, Room
 
 
 class EntitiesRequestSerializer(ma.Schema):

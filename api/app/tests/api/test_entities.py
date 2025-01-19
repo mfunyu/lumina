@@ -1,8 +1,8 @@
 import uuid
 import pytest
 
-from glados import constants
-from glados.models import Entity, Room
+from lumina import constants
+from lumina.models import Entity, Room
 
 mimetype = 'application/json'
 headers = {

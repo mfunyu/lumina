@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     speechText() {
-      let text = "Hello. Wellcome to Glados Configuration! You can modify rooms and entities here. "
+      let text = "Hello. Wellcome to Lumina Configuration! You can modify rooms and entities here. "
       return text
     },
     roomSpeechText() {
@@ -130,7 +130,7 @@ export default {
         })
     },
     getEntities() {
-      return coreApi.glados.getEntities()
+      return coreApi.lumina.getEntities()
         .then((entities) => {
           this.entities = entities
         })
@@ -140,7 +140,7 @@ export default {
         })
     },
     getRooms() {
-      return coreApi.glados.getRooms()
+      return coreApi.lumina.getRooms()
         .then((rooms) => {
           this.rooms = rooms
         })
@@ -190,7 +190,7 @@ export default {
     handleSave(data) {
       if (this.isItemModal) {
         if (this.modalData.id) {
-          return coreApi.glados.changeEntityData(this.modalData.id, data)
+          return coreApi.lumina.changeEntityData(this.modalData.id, data)
             .then((updatedEntity) => {
               const index = this.entities.findIndex((entity) => entity.id === updatedEntity.id)
               if (index !== -1) {
@@ -202,7 +202,7 @@ export default {
               this.modalErrorMessage = error.data.errors
             })
         } else {
-          return coreApi.glados.createEntity(data)
+          return coreApi.lumina.createEntity(data)
             .then((newEntity) => {
               this.entities.push(newEntity)
               this.closeModal()
@@ -213,7 +213,7 @@ export default {
         }
       } else {
         if (this.modalData.id) {
-          return coreApi.glados.changeRoomData(this.modalData.id, data)
+          return coreApi.lumina.changeRoomData(this.modalData.id, data)
             .then((updatedRoom) => {
               const index = this.rooms.findIndex((room) => room.id === this.modalData.id)
               if (index !== -1) {
@@ -225,7 +225,7 @@ export default {
               this.modalErrorMessage = error.data.errors
             })
         } else {
-          return coreApi.glados.createRoom(data)
+          return coreApi.lumina.createRoom(data)
             .then((newRoom) => {
               this.rooms.push(newRoom)
               this.closeModal()
@@ -237,7 +237,7 @@ export default {
       }
     },
     deleteEntity(id) {
-      coreApi.glados.deleteEntity(id)
+      coreApi.lumina.deleteEntity(id)
         .then(() => {
           this.entities = this.entities.filter((entity) => entity.id !== id)
         })
@@ -246,7 +246,7 @@ export default {
         })
     },
     deleteRoom(id) {
-      coreApi.glados.deleteRoom(id)
+      coreApi.lumina.deleteRoom(id)
         .then(() => {
           this.rooms = this.rooms.filter((room) => room.id !== id)
         })

@@ -4,8 +4,8 @@ from datetime import datetime
 from sqlalchemy import Index
 from sqlalchemy.dialects.postgresql import UUID
 
-from glados import db
-from glados.models.abc import BaseModel
+from lumina import db
+from lumina.models.abc import BaseModel
 
 
 class Entity(db.Model, BaseModel):

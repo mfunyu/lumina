@@ -1,4 +1,4 @@
-from glados import create_app
+from lumina import create_app
 
 app = create_app()
 

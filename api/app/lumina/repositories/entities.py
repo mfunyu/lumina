@@ -1,4 +1,4 @@
-from glados.models import Entity
+from lumina.models import Entity
 from sqlalchemy import asc
 
 

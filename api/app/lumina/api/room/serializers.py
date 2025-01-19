@@ -1,7 +1,7 @@
 from marshmallow import fields, validate, validates
 
-from glados import ma
-from glados.models import Room
+from lumina import ma
+from lumina.models import Room
 
 
 class RoomCreateSerializer(ma.Schema):

@@ -28,7 +28,7 @@ def create_app(env=None):
     Migrate(app, db)
     CORS(app)
 
-    from glados.api.routes import blueprint as api_blueprint
+    from lumina.api.routes import blueprint as api_blueprint
     app.register_blueprint(api_blueprint)
 
     app.register_error_handler(Exception, server_error_handler)

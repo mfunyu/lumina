@@ -20,8 +20,8 @@ class TestingConfig(Config):
     TESTING = True
 
     # Database
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:root@db_test/glados"
-    OPENDATA_DATABASE_URI = "postgresql+psycopg2://postgres:root@db_test/glados"
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:root@db_test/lumina"
+    OPENDATA_DATABASE_URI = "postgresql+psycopg2://postgres:root@db_test/lumina"
 
 
 CONFIG_MAP = {

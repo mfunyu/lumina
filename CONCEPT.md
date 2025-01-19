@@ -1,11 +1,10 @@
-[README](README.md) • [Concept & Design (en)](CONCEPT.md) • [Subject (fr)](PDF.pdf)
-
-# Concept of Glados (Design Doc)
+[README](README.md) • [Concept & Design (en)](CONCEPT.md)
+# Concept of Lumina (Design Doc)
 
 ## Grand Goal
 > connecter toutes les maisons de ce monde afin de les rendre autonomes
 
-### Why Glados?
+### Why Lumina?
 
 #### 💡Enhanced Convenience
 - Tasks can be done automatically or remotely
