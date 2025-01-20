@@ -1,16 +1,16 @@
 <template>
   <div
-    class="w-32"
+    class="flex w-32 items-center"
     @mouseover="isHover = true"
     @mouseleave="isHover = false">
-    <img
-      v-show="isHover"
-      :src="LogoActive"
-      alt="logo_default_active">
-    <img
-      v-show="!isHover"
-      :src="Logo"
-      alt="logo_default">
+    <component
+      :is="iconComponent"
+      :size="45"
+      :class="iconColor" />
+
+    <div class="text-2xl text-gray-600 cursor-default font-bold">
+      LUMINA
+    </div>
   </div>
 </template>
 
@@ -25,6 +25,14 @@ export default {
       Logo,
       LogoActive,
       isHover: false
+    }
+  },
+  computed: {
+    iconComponent() {
+      return this.isHover ? "lightbulb" : "lightbulboff"
+    },
+    iconColor() {
+      return this.isHover ? "text-yellow-400" : "text-gray-400"
     }
   }
 }
