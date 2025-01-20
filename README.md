@@ -2,7 +2,7 @@
 
 [![wakatime](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/0628c6fd-9ef4-4bec-b62d-ead7a5acae4c.svg)](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/0628c6fd-9ef4-4bec-b62d-ead7a5acae4c)
 
-# 🏘️💡Lumina
+# 🏘️💡Lumina - Concept
 
 Lumina is an advanced system **designed to connect homes worldwide**, making them **autonomous and highly efficient**. It enhances convenience by automating tasks, controlling home environments remotely, and providing custom routines for users.
 
