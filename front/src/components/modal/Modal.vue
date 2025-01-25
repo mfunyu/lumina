@@ -1,5 +1,3 @@
-
-Copier le code
 <template>
   <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
     <div class="bg-white p-6 rounded-md shadow-md w-2/4">
@@ -41,7 +39,7 @@ Copier le code
               <option value="light">Light</option>
               <option value="switch">Switch</option>
               <option value="multimedia">Multimedia</option>
-              <option value="air-conditioned">Air conditioner</option>
+              <option value="air_conditioned">Air conditioner</option>
             </select>
           </div>
           <div class="mb-4">
@@ -118,6 +116,7 @@ export default {
       this.$emit("close")
     },
     handleSubmit() {
+      console.log(this.roomId)
       if (this.isItem) {
         this.$emit("save", {
           name: this.name,

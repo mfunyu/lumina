@@ -2,7 +2,9 @@
 
 [![wakatime](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/0628c6fd-9ef4-4bec-b62d-ead7a5acae4c.svg)](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/0628c6fd-9ef4-4bec-b62d-ead7a5acae4c)
 
-# 🏘️💡Lumina - Concept
+# 🏘️💡Lumina
+
+## Concept Story
 
 Lumina is an advanced system **designed to connect homes worldwide**, making them **autonomous and highly efficient**. It enhances convenience by automating tasks, controlling home environments remotely, and providing custom routines for users.
 
@@ -10,16 +12,21 @@ Lumina optimizes energy usage, promotes the use of renewable energy, and encoura
 
 This innovative solution aims to transform how we interact with and manage our homes, creating a smarter, greener, and more inclusive living environment.
 
-## Usage
+## This Project
+
+This project, envisioned as an integral part of the Lumina ecosystem, is designed to function as a versatile dashboard for monitoring and controlling connected devices. With its user-friendly interface, it empowers users to register new devices, modify existing ones, and manage devices within specific rooms. Additionally, the dashboard provides advanced filtering options based on device categories and allows seamless control of device statuses, ensuring an efficient and intuitive smart home experience.
+
+## Design - Dashboard
 
 | Dashboard | Config | About |
 | :--: | :--: | :--: |
-| <img width="479" alt="Capture d’écran 2024-07-01 à 11 33 26" src="https://github.com/mfunyu/lumina/assets/60470877/699f2b77-8fa5-40de-82d3-eead215b7953"> | <img width="476" alt="Capture d’écran 2024-07-01 à 11 30 35" src="https://github.com/mfunyu/lumina/assets/60470877/73acb0c5-2626-4375-bed0-559875ef94d1"> | <img width="475" alt="Capture d’écran 2024-07-01 à 11 28 53" src="https://github.com/mfunyu/lumina/assets/60470877/72d7fe8d-a377-489e-adc6-71ebdee9ad9e"> |
-| <img width="479" alt="Capture d’écran 2024-07-01 à 11 28 34" src="https://github.com/mfunyu/lumina/assets/60470877/d651efdb-f784-43b8-9a62-2b2aa93c788e"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 10" src="https://github.com/mfunyu/lumina/assets/60470877/a22c2a35-3e1a-41b1-936f-61739b9c3165"> | <img width="477" alt="Capture d’écran 2024-07-01 à 11 34 28" src="https://github.com/mfunyu/lumina/assets/60470877/615f50a4-2256-4e6b-a206-45653cfd4004">
+| ![Image](https://github.com/user-attachments/assets/b01dbd7d-4470-468d-8f6f-72ca24e238e4) | ![Image](https://github.com/user-attachments/assets/05c82d78-9937-43ef-bf2f-e4c8ae967a03) | ![Image](https://github.com/user-attachments/assets/2b03e239-e37a-43d5-ad08-50d09e908f17) |
+| ![Image](https://github.com/user-attachments/assets/9f85cc45-5401-46da-a0e1-cd2bdc9ddebe) | ![Image](https://github.com/user-attachments/assets/cc23f39c-c5cc-44df-be87-1e488de824e0) | ![Image](https://github.com/user-attachments/assets/b76a6ec8-7623-4a32-9106-3d1f0933ef11)
 
-## ⚙️Installation
 
-### Steps
+# ⚙️Installation
+
+## Steps
 1. Clone the repository:
    ```bash
    git clone https://github.com/mfunyu/lumina.git

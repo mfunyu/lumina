@@ -15,15 +15,11 @@
 </template>
 
 <script>
-import Logo from "@/assets/images/logo/logo_default.svg"
-import LogoActive from "@/assets/images/logo/logo_default_active.svg"
 
 export default {
   name: "Logo",
   data() {
     return {
-      Logo,
-      LogoActive,
       isHover: false
     }
   },
