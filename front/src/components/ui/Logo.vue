@@ -19,9 +19,7 @@
 export default {
   name: "Logo",
   data() {
-    return {
-      isHover: false
-    }
+    return { isHover: false }
   },
   computed: {
     iconComponent() {
